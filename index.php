@@ -14,12 +14,12 @@ elseif ($_SESSION['status'] == 3) header("Location: done.php") && die();
 				if ($_SESSION['stage'] == '0') {
 					if ($_SESSION['language'] == 1) {
 						echo('<h2>printf("%s","Hey C Coders!");</h2><br/>');
-						GetInstructions('c');	
+						GetInstructions('c');
 					} else {
 						echo('<h2>cout<<"Howdy C++ Aficionados!";</h2><br/>');
 						GetInstructions('cpp');
 					}
-				} 
+				}
 				elseif ($_SESSION['stage'] == '2a' || $_SESSION['stage'] == '2b') {
 					echo '<h2>Welcome to Stage 2!!</h2><br/>';
 					echo <<<CONTENT
@@ -33,7 +33,7 @@ elseif ($_SESSION['status'] == 3) header("Location: done.php") && die();
 							<li>Any act of dishonesty will result in immediate disqualification.</li>
 							<li>The Decision of the Judges is final & beyond reproach.</li>
 						</ul>
-						
+
 CONTENT;
         $res1 = $mysqli->query("SELECT * FROM `stages` WHERE `stageid` = '{$_SESSION['stage']}'");
 		$res1 = $res1->fetch_assoc();
@@ -62,7 +62,7 @@ CONTENT;
 							<li>Any act of dishonesty will result in immediate disqualification.</li>
 							<li>The Decision of the Judges is final & beyond reproach.</li>
 						</ul>
-						
+
 CONTENT;
   		$res1 = $mysqli->query("SELECT * FROM `stages` WHERE `stageid` = '{$_SESSION['stage']}'");
 		$res1 = $res1->fetch_assoc();
@@ -81,8 +81,8 @@ CONTENT;
 
   			} else {
   		?>
-  		<h2>Welcome to Game Of Bugs !!</h2><br/>
-  		<span style="font-size: 1.5em"> Are you ready to start ? Select your language of Choice to proceed to Rules & Instructions.</span></br/>
+  		<h2>Welcome to Debugger !!</h2><br/>
+  		<span style="font-size: 1.5em"> Are you ready to start ? Select your language of Choice and go through the Rules & Instructions.</span></br/>
   		<div id="clang" onclick="AjaxGet('lang.php?lang=c', 'main-content');"></div>
   		<div id="cpplang" onclick="AjaxGet('lang.php?lang=cpp', 'main-content');"></div>
   	</div>

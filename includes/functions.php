@@ -1,4 +1,4 @@
-<?php	
+<?php
 require_once("config.php");
 
 
@@ -8,7 +8,7 @@ require_once("config.php");
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Game Of Bugs</title>
+    <title>Debugger</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/main.css" rel="stylesheet" media="screen">
@@ -44,8 +44,9 @@ CONTENT;
 					<li>Use of Compilers is prohibited.</li>
 					<li>Marks will be provided based on the time of completion and correctness of solution.</li>
 					<li>All Answers will be locked and cannot be altered after 30 minutes.</li>
-					<li><strong>Do NOT refresh the page or hit the Back button.</strong></li>
+					<li><strong>Do NOT refresh the page or hit the Back button at any time.</strong></li>
 					<li>Any act of dishonesty will result in immediate disqualification.</li>
+					<li>If any doubts, please ask the event managers before proceeding.</li>
 					<li>The Decision of the Judges is final & beyond reproach.</li>
 				</ul>
 				<button class="btn btn-large btn-primary centerh" onclick="window.location.href = 'starttest.php'" style="width: 150px;" id="btn-start">Lets Start!</button>
