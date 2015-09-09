@@ -12,6 +12,10 @@ If you would like to run this platform on your own machine, then the database ha
 be set up properly. For this in the MySql interface, the file [gob.sql](https://github.com/pbhopalka/Debugger/blob/master/gob.sql)
 has to be run and then data needs to be added into the database accordingly.
 
+Also, inside the `/includes/config.ini` file, the server name, database name, sql id
+and sql password needs to be saved based on where you are hosting this platform and
+where your database is stored.
+
 ## Manager platform
 
 There's a separate platform for manager to use the database effectively removing the
