@@ -7,19 +7,19 @@ require_once("includes/global.php");
 		metadetails();
 		echo '</head>';
 		echo '<body>';
-		$res = $mysqli->query("SELECT * FROM `stages` WHERE `stageid` = '{$_SESSION['stage']}'");
-		$res = $res->fetch_assoc();
+		$res1 = $mysqli->query("SELECT * FROM `stages` WHERE `stageid` = '{$_SESSION['stage']}'");
+		$res1 = $res1->fetch_assoc();
 		$_SESSION['questionid'] = 1;
-		if ($res['type'] == "syntax" || $res['type'] == "logic1" || $res['type'] == "obfuscate") {			
+		if ($res1['type'] == "syntax" || $res1['type'] == "logical" || $res1['type'] == "obfuscated") {			
 		?>
 			<div id="content" class="box" style="width: 70%; height: 400px; top: 50px; "></div>
 			<div id="paginator" class="pagination">	
 				<ul>	
-					<li onclick="GetQuestion('question.php', '<?php echo $_SESSION['stage']; ?>', '1', ace.edit('content').getValue());"><a href="#">1</a></li>  
-					<li onclick="GetQuestion('question.php', '<?php echo $_SESSION['stage']; ?>', '2', ace.edit('content').getValue());"><a href="#">2</a></li>
+					<li id = "1" onclick="GetQuestion('question.php', '<?php echo $_SESSION['stage']; ?>', '1', ace.edit('content').getValue(), this.id);"><a href="#" id="a1">1</a></li>  
+					<li id =  "2" onclick="GetQuestion('question.php', '<?php echo $_SESSION['stage']; ?>', '2', ace.edit('content').getValue(),this.id);"><a href="#" id="a2">2</a></li>
 					<?php
-						if ($_SESSION['stage'] != '3a' && $_SESSION['stage'] != '3b') echo "<li onclick=\"GetQuestion('question.php', '{$_SESSION['stage']}', '3', ace.edit('content').getValue());\"><a href=\"#\">3</a></li>";  
-						if ($_SESSION['stage'] == '1a' || $_SESSION['stage'] == '1b') echo "<li onclick=\"GetQuestion('question.php', '{$_SESSION['stage']}', '4', ace.edit('content').getValue());\"><a href=\"#\">4</a></li>";
+						if ($_SESSION['stage'] != '3a' && $_SESSION['stage'] != '3b') echo "<li id='3' onclick=\"GetQuestion('question.php', '{$_SESSION['stage']}', '3', ace.edit('content').getValue(),this.id);\"><a href=\"#\" id=\"a3\">3</a></li>";  
+						if ($_SESSION['stage'] == '1a' || $_SESSION['stage'] == '1b') echo "<li id ='4' onclick=\"GetQuestion('question.php', '{$_SESSION['stage']}', '4', ace.edit('content').getValue(),this.id);\"><a href=\"#\" id=\"a4\">4</a></li>"; 
 
 					?>
 				</ul>  
@@ -30,9 +30,9 @@ require_once("includes/global.php");
 					echo "<button id=\"resetAnswer\" onclick=\"ResetAns('question.php', '{$_SESSION['stage']}')\" class=\"btn btn-large btn-danger\" style=\"position: absolute; right: 1%; bottom: 5%; width: 200px;\" >Reset Answer</button>";
 					echo "<button id=\"submitsol\" onclick=\"SubmitAns('question.php', '{$_SESSION['stage']}')\" class=\"btn btn-large btn-success\" style=\"width: 200px;\" >Submit Solutions</button>";
 				}
-				if ($_SESSION['stage'] == '2a' || $_SESSION['stage'] == '2b') {
-					echo "<button id=\"compilesol\" onclick=\"CompileCheck()\" class=\"btn btn-large btn-success\" style=\"width: 200px;\" >Compile & Check</button>";	
-				}
+				//if ($_SESSION['stage'] == '2a' || $_SESSION['stage'] == '2b') {
+				//	echo "<button id=\"compilesol\" onclick=\"CompileCheck()\" class=\"btn btn-large btn-success\" style=\"width: 200px;\" >Compile & Check</button>";	
+				//}
 			?>
 			<button id="timer" class="btn btn-large btn-warning" style="position: absolute; left: 1%; bottom: 5%; width: 200px;" ><div id="timer_count">A</div></button>
 			<script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -67,7 +67,7 @@ require_once("includes/global.php");
 					function timer_end(go) {
 						SubmitAns('question.php', '<?php echo $_SESSION['stage']; ?>', 3);
 					}
-					start_timer(<?php echo $res['time'] * 60; ?>);
+					start_timer(<?php echo $res1['time'] * 60; ?>);
 				});
 			</script>
 			<script>
@@ -77,7 +77,7 @@ require_once("includes/global.php");
 					editor.getSession().setMode("ace/mode/h");					
 				};
 
-				function GetQuestion(a, b, c, d) {
+				function GetQuestion(a, b, c, d,e) {
 					$.post(a,
 						  {
 						    stage : b,
@@ -86,9 +86,19 @@ require_once("includes/global.php");
 						    op : 1
 						  },
 						  function(data){
-						  	val1 = data.getElementById
+						  	//val1 = data.getElementById
 							ace.edit('content').setValue(data);
   					});
+  				    var i = 1;
+  					while(i < 5)
+  					{
+  					    var link = document.getElementById("a"+i);
+  					    link.style.backgroundColor = "white";
+  					    i = i + 1;
+  					}
+  					var link = document.getElementById("a"+e);
+  					link.style.backgroundColor = "black";
+
 				}
 
 				<?php 
@@ -114,7 +124,8 @@ require_once("includes/global.php");
 								  {
 								    stage : b,
 								    ans : ace.edit('content').getValue(),
-								    op : 3
+								    op : 3,
+								    time : timer_count
 								  },
 								  function(){
 									$(location).attr('href','index.php');
@@ -138,7 +149,7 @@ require_once("includes/global.php");
 				<?php
 					}
 				?>
-				GetQuestion('question.php', '<?php echo $_SESSION['stage'] ?>', '1', '');
+				GetQuestion('question.php', '<?php echo $_SESSION['stage'] ?>', '1', '',1);
 			</script>
 		<?php
 			
@@ -168,8 +179,9 @@ require_once("includes/global.php");
 			ON DUPLICATE KEY UPDATE teamid = VALUES(teamid), stageid = VALUES(stageid), questionid = VALUES(questionid), ans = VALUES(ans)");
 		}
 		elseif ($_POST['op'] == 3) {
-			$mysqli->query("INSERT INTO `answers` (teamid, stageid, questionid, ans) VALUES('{$_SESSION['teamid']}', '{$_SESSION['stage']}', '{$_SESSION['questionid']}', '".$mysqli->real_escape_string($_POST['ans'])."')
-	ON DUPLICATE KEY UPDATE teamid = VALUES(teamid), stageid = VALUES(stageid), questionid = VALUES(questionid), ans = VALUES(ans)");
+		    $t = $_POST['time'];
+			$mysqli->query("INSERT INTO `answers` (teamid, stageid, questionid, ans,time) VALUES('{$_SESSION['teamid']}', '{$_SESSION['stage']}', '{$_SESSION['questionid']}', '".$mysqli->real_escape_string($_POST['ans'])."','{$t}')
+	ON DUPLICATE KEY UPDATE teamid = VALUES(teamid), stageid = VALUES(stageid), questionid = VALUES(questionid), ans = VALUES(ans), time = VALUES(time)");
 			$_SESSION['status'] = 1;
 			$_SESSION['questionid'] = 0;
 			if ($_SESSION['stage'] == '3a' || $_SESSION['stage'] == '3b') $_SESSION['status'] = '3';

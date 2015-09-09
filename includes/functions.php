@@ -1,5 +1,5 @@
 <?php	
-require_once("includes/config.php");
+require_once("config.php");
 
 
 	function metadetails() {
@@ -40,6 +40,7 @@ CONTENT;
 				<ul id="Rules">
 					<li>The first round will be an offline round of 30 minutes.</li>
 					<li>You will be given 4 questions with syntax errors.</li>
+					<li>Your answer should not contain any <strong> errors or warnings <strong> when compiled with gcc/g++ compiler.</li>
 					<li>Use of Compilers is prohibited.</li>
 					<li>Marks will be provided based on the time of completion and correctness of solution.</li>
 					<li>All Answers will be locked and cannot be altered after 30 minutes.</li>
