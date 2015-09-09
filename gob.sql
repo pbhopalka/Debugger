@@ -75,6 +75,18 @@ CREATE TABLE IF NOT EXISTS `teams` (
   PRIMARY KEY (`teamid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- ---------------------------------------------------------
+
+--
+-- Table Structure for table 'manager'
+--
+
+CREATE TABLE IF NOT EXISTS 'manager' (
+  'username' varchar(20) NOT NULL,
+  'password' varchar(20) NOT NULL,
+  PRIMARY KEY ('username')
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
