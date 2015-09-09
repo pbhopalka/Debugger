@@ -1,26 +1,43 @@
-<?php 
+<?php
 require_once("../includes/global.php");
 header('Content-type: text/html; charset=utf-8');
 echo <<<CONTENT
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Game Of Bugs</title>
+    <title>Debugger - Add a question</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="../css/main.css" rel="stylesheet" media="screen">
 CONTENT;
 if(!isset($_SESSION['admin'])) header('Location: login.php') && die();
-if (!isset($_POST["q"])) { 
+if (!isset($_POST["q"])) {
 ?>
 <html>
 <head>
-<title>Debugger</title>
+<title>Debugger - Add a question</title>
 <script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
 <h3>Submit new question</h3>
+
+<br>
+<form action="" method="POST">
+<label for="stage">Stage ID </label>
+<input type="text" name="stageid" id="stage"required /><br>
+<label for="question">Question ID </label>
+<input type="text" name="questionid" required /><br>
+<label for="Q">Question </label>
+<textarea name="question" id="Q" required></textarea><br>
+<label for="ans">Expected Output </label>
+<textarea name="answer" id="ans" required></textarea><br>
+<input type="hidden" name="q" value="1" />
+<button type="submit" class="btn btn-default">Submit</button>
+</form>
+<br>
+<a href="index.php" style="color:black"><button>Home</button></a>
+<!--
 <br>
 <form action="" method="POST" class="form-horizontal" role="form">
 <div class = "form-group">
@@ -53,6 +70,8 @@ if (!isset($_POST["q"])) {
 </div>
 </div>
 </form>
+<br>
+<a href="index.php" style="color:black"><button>Home</button></a>-->
 </body>
 </html>
 <?php
@@ -71,5 +90,5 @@ $i = file_put_contents("/home/anant/debugger/questions/".$fname,$question);
 $fname1 = $stageid.$questionid.".ans";
 $i = file_put_contents("/home/anant/debugger/answers/".$fname,$answer);
 header('Location: addq.php');
-} 
+}
 ?>

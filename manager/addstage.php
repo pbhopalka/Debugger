@@ -1,21 +1,21 @@
-<?php 
+<?php
 require_once("../includes/global.php");
 header('Content-type: text/html; charset=utf-8');
 echo <<<CONTENT
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Game Of Bugs</title>
+    <title>Debugger - Add a stage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="../css/main.css" rel="stylesheet" media="screen">
 CONTENT;
 if(!isset($_SESSION['admin'])) header('Location: login.php') && die();
-if (!isset($_POST["q"])) { 
+if (!isset($_POST["q"])) {
 ?>
 <html>
 <head>
-<title>Debugger</title>
+<title>Debugger - Add a stage</title>
 <script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <h3>Add a new Stage </h3>
@@ -31,7 +31,7 @@ if (!isset($_POST["q"])) {
 <input type="submit" />
 </form>
 <br>
-<a href="index.php" style="color:black">Home</a>
+<a href="index.php" style="color:black"><button>Home</button></a>
 <?php
 }
 else
@@ -43,5 +43,5 @@ $time = $_POST['time'];
 $sql = "INSERT INTO stages VALUES(\"$stageid\", \"$type\", \"$time\", 0)";
 if (!$result=$mysqli->query($sql)) {die("Error".$mysqli->error);}
 header('Location: addstage.php');
-} 
+}
 ?>

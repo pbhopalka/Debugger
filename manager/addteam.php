@@ -1,4 +1,4 @@
-<?php 
+<?php
 require("../includes/global.php");
 header('Content-type: text/html; charset=utf-8');
 echo <<<CONTENT
@@ -11,7 +11,7 @@ echo <<<CONTENT
     <link href="../css/main.css" rel="stylesheet" media="screen">
 CONTENT;
 if(!isset($_SESSION['admin'])) header('Location: login.php') && die();
-if (!isset($_POST["q"])) { 
+if (!isset($_POST["q"])) {
 ?>
 <html>
 <head>
@@ -34,6 +34,8 @@ if (!isset($_POST["q"])) {
 <input type="hidden" name="q" value="1" />
 <input type="submit" />
 </form>
+<br>
+<a href="index.php" style="color:black"><button>Home</button></a>
 <?php
 }
 else
@@ -47,5 +49,5 @@ $teamid = $_POST["teamid"];
 $sql = "INSERT INTO teams(teamid,password) VALUES(\"$teamid\", \"$teamid\")";
 if (!$result=$mysqli->query($sql)) {die("Error: ".$mysqli->error);}
 header('Location: addteam.php');
-} 
+}
 ?>
