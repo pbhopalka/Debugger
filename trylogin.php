@@ -2,12 +2,14 @@
 require_once("includes/global.php");
 if (!isset($_POST['teamid']) || !isset($_POST['password'])) header("Location: login.php") && die();
 echo "<h2>";
-	$stmt = $mysqli->prepare("SELECT `status`, `stage`, `language` FROM `teams` WHERE `teamid` = ? AND `password` = ?");
-/*$teamid = mysql_real_escape_string($_POST['teamid']);
-	$password = mysql_real_escape_string($_POST['password']);*/
 
-$teamid = 'DEB001';
-	$password = '123456';
+	$stmt = $mysqli->prepare("SELECT `status`, `stage`, `language` FROM `teams` WHERE `teamid` = ? AND `password` = ?");
+
+//	$teamid = mysql_real_escape_string($_POST['teamid']);
+//	$password = mysql_real_escape_string($_POST['password']);
+
+	$teamid = $_POST['teamid'];
+	$password = $_POST['password'];
 
 
 	$stmt->bind_param("ss", $teamid, $password);
