@@ -2,7 +2,6 @@
 require_once("includes/global.php");
 metadetails();
 ?>
-
 </head>
   <body>
   	<div id="main-content" class="box center">
