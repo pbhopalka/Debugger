@@ -20,3 +20,8 @@ where your database is stored.
 
 There's a separate platform for manager to use the database effectively removing the
 hassle of the event manager to have an extensive knowledge of the underlying database.
+
+## Some information
+
+'/includes/config.ini' and '/includes/connection.php' have not been added due to security
+reasons. Once the platform is completed, it will be added.
