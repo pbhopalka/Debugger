@@ -20,9 +20,10 @@ if (!isset($_POST["q"])) {
 </head>
 <h3>Add a new Team </h3>
 <br>
+<p>Password is going to be the same as Username</p>
 <form action="" method="POST">
 <label for="teamid">Team ID</label>
-<input type="text" name="teamid" id="teamid" required /><br>
+<input type="text" name="teamid" id="teamid" placeholder="Must start with DEB"required /><br>
 <!--<label for="status">Status</label>
 <input type="text" name="status" id="status"/><br>
 <label for="stage">Stage ID</label>

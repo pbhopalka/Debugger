@@ -22,11 +22,11 @@ if (!isset($_POST["q"])) {
 <br>
 <form action="" method="POST">
 <label for="stage">Stage ID </label>
-<input type="text" name="stageid" id="stage"required /><br>
+<input type="text" name="stageid" id="stage" placeholder="For example: 1a" required /><br>
 <label for="type">Type </label>
-<input type="text" name="type" id="type" required /><br>
+<input type="text" name="type" id="type" placeholder="syntax, logical, obfuscated"required /><br>
 <label for="time">Time </label>
-<input type="text" name="time" id="time" required /><br>
+<input type="text" name="time" id="time" placeholder="In minutes"required /><br>
 <input type="hidden" name="q" value="1" />
 <input type="submit" />
 </form>

@@ -5,7 +5,7 @@ echo <<<CONTENT
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Game Of Bugs</title>
+    <title>Debugger: Manager</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="../css/main.css" rel="stylesheet" media="screen">
@@ -20,7 +20,8 @@ if(!isset($_POST["username"])){
       <form id="form-signin" class="box" action="" method="POST">
         <h2 id="form-signin-heading">Please Sign In</h2>
         <div class="input-prepend">
-			<input class="span2" name="username" id="teamid" type="text" placeholder="user ID">
+        <span class="add-on">ID</span>
+			<input class="span2" name="username" id="teamid" type="text" placeholder="Manager ID">
 		</div>
         <input type="password" id="password" name="password" class="input-block-level" placeholder="Password">
         <button class="btn btn-large btn-primary centerh" style="width: 100px;" id="btn-login" type="submit">Sign in</button>

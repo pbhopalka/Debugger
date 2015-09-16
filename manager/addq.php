@@ -25,9 +25,9 @@ if (!isset($_POST["q"])) {
 <br>
 <form action="" method="POST">
 <label for="stage">Stage ID </label>
-<input type="text" name="stageid" id="stage"required /><br>
+<input type="text" name="stageid" id="stage" placeholder="For example: 1a" required /><br>
 <label for="question">Question ID </label>
-<input type="text" name="questionid" required /><br>
+<input type="text" name="questionid" placeholder="For example: 2" required /><br>
 <label for="Q">Question </label>
 <textarea name="question" id="Q" required></textarea><br>
 <label for="ans">Expected Output </label>
