@@ -67,7 +67,7 @@ elseif ($_SESSION['status'] == 3) header("Location: done.php") && die();
 						}
 				}
 
-  			} 
+  			}
 			else {
 				?>
 				<h2>Welcome to Debugger !!</h2><br/>
