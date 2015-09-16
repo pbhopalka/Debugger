@@ -35,15 +35,15 @@ elseif ($_SESSION['status'] == 3) header("Location: done.php") && die();
 							<li>Any act of dishonesty will result in immediate disqualification.</li>
 							<li>The Decision of the Judges is final & beyond reproach.</li>
 						</ul>';
-					$queryString = "SELECT * FROM `stages` WHERE `stageid` = '{$_SESSION['stage']}';";
+					$queryString = "SELECT * FROM stages WHERE stageid = '{$_SESSION['stage']}' AND stageStart = 1;";
 					$result = $mysqli->query($queryString);
-					if($result){
+					if($result->num_rows){
 						echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\">Lets Start!</button>";
 					}
 					else{
 						echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\" disabled>Lets Start!</button>";
 					}
-  				}
+  			}
 				elseif ($_SESSION['stage'] == '3a' || $_SESSION['stage'] == '3b') {
 					echo '<h2>Welcome to Stage 3!!</h2><br/>';
 					echo '
@@ -57,9 +57,9 @@ elseif ($_SESSION['status'] == 3) header("Location: done.php") && die();
 							<li>Any act of dishonesty will result in immediate disqualification.</li>
 							<li>The Decision of the Judges is final & beyond reproach.</li>
 						</ul>';
-						$queryString = "SELECT * FROM `stages` WHERE `stageid` = '{$_SESSION['stage']}';";
+						$queryString = "SELECT * FROM stages WHERE stageid = '{$_SESSION['stage']}' AND stageStart = 1;";
 						$result = $mysqli->query($queryString);
-						if($result){
+						if($result->num_rows){
 							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\">Lets Start!</button>";
 						}
 						else{

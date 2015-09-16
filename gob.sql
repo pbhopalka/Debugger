@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `stages` (
   `stageid` varchar(2) NOT NULL,
   `type` varchar(10) NOT NULL,
   `time` tinyint(4) NOT NULL,
+  'stageStart' int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`stageid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
