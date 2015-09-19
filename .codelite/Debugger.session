@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Session Name="G:\work\Athena\public_html\Debugger\Debugger.workspace">
+  <int Value="0" Name="m_selectedTab"/>
+  <wxString Value="G:\work\Athena\public_html\Debugger\Debugger.workspace" Name="m_workspaceName"/>
+  <TabInfoArray Name="TabInfoArray">
+    <TabInfo>
+      <wxString Value="G:\work\Athena\public_html\Debugger\manager\checker.php" Name="FileName"/>
+      <int Value="80" Name="FirstVisibleLine"/>
+      <int Value="90" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="G:\work\Athena\public_html\Debugger\manager\changes.sh" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="0" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="G:\work\Athena\public_html\Debugger\manager\compile.sh" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="3" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="G:\work\Athena\public_html\Debugger\manager\addq.php" Name="FileName"/>
+      <int Value="69" Name="FirstVisibleLine"/>
+      <int Value="0" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="G:\work\Athena\public_html\Debugger\gob.sql" Name="FileName"/>
+      <int Value="54" Name="FirstVisibleLine"/>
+      <int Value="71" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+  </TabInfoArray>
+  <SerializedObject Name="m_breakpoints">
+    <long Value="0" Name="Count"/>
+  </SerializedObject>
+</Session>

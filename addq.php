@@ -1,10 +1,14 @@
-<?php 
+<?php
+
 require_once("includes/global.php");
 metadetails();
-if (!isset($_POST["q"])) { 
-?>
+if(!isset($_POST["q"])) {
+	
+	?>
 <html>
 <head>
+
+
 <title>Debugger</title>
 <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
@@ -41,16 +45,19 @@ if (!isset($_POST["q"])) {
 </body>
 </html>
 <?php
+	
+} else {
+	include 'includes/connection.php';
+	$stageid = $_POST['stageid'];
+	$questionid = $_POST['questionid'];
+	$question = $_POST['question'];
+	$sql = "INSERT INTO questions VALUES(\"$stageid\",\"$questionid\",\"$question\")";
+	if(!$result = $mysqli->query($sql)) {
+		die("Error" . 
+			$mysqli->error);
+	}
+	//echo "Question has been Added";
+	header('Location: addq.php');
 }
-else
-{
-include 'includes/connection.php';
-$stageid = $_POST['stageid'];
-$questionid = $_POST['questionid'];
-$question = $_POST['question'];
-$sql = "INSERT INTO questions VALUES(\"$stageid\",\"$questionid\",\"$question\")";
-if (!$result=$mysqli->query($sql)) {die("Error".$mysqli->error);}
-//echo "Question has been Added";
-header('Location: addq.php');
-} 
+
 ?>

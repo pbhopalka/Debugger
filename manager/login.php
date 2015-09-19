@@ -1,19 +1,23 @@
 <?php
+
 require_once("../includes/global.php");
 header('Content-type: text/html; charset=utf-8');
-echo <<<CONTENT
+echo<<<CONTENT
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Debugger: Manager</title>
+    <title>Debugger: Manager : Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="../css/main.css" rel="stylesheet" media="screen">
-CONTENT;
-if (isset($_SESSION['admin']) && ($_GET['key'] != "M1112AER"))
-{ header("Location: index.php");}
-if(!isset($_POST["username"])){
-?>
+CONTENT
+;
+if(isset($_SESSION['admin'])&&($_GET['key'] != "M1112AER")) {
+	header("Location: index.php");
+}
+if(!isset($_POST["username"])) {
+	
+	?>
   </head>
   <body>
     <div id="form-signin-container">
@@ -33,22 +37,19 @@ if(!isset($_POST["username"])){
   </body>
 </html>
 <?php
+	
+} else {
+	include '../includes/connection.php';
+	$uid = $_POST['username'];
+	$pass = $_POST['password'];
+	$sql = "SELECT * FROM manager WHERE username = '{$uid}' AND password = '{$pass}'";
+	$result = $mysqli->query($sql);
+	if($result->num_rows) {
+		$_SESSION['admin'] = True;
+		header('Location: index.php');
+	} else {
+		header('Location: login.php');
+	}
 }
-else {
-include '../includes/connection.php';
-$uid = $_POST['username'];
-$pass = $_POST['password'];
-$sql = "SELECT * FROM manager WHERE username = '{$uid}' AND password = '{$pass}'";
 
-$result = $mysqli->query($sql);
-if($result->num_rows)
-{
-    $_SESSION['admin'] = True;
-    header('Location: index.php');
-}
-else
-{
-    header('Location: login.php');
-}
-}
 ?>
