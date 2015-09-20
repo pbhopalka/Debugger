@@ -88,6 +88,21 @@ CREATE TABLE IF NOT EXISTS 'manager' (
   PRIMARY KEY ('username')
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- ---------------------------------------------------------
+
+--
+-- Table Structure for table 'result'
+--
+
+CREATE TABLE IF NOT EXISTS 'result' (
+  'teamid' varchar(20) NOT NULL,
+  'stageid' varchar(5) NOT NULL,
+  'questionid' int(11) NOT NULL,
+  'status' int(11) NOT NULL,
+  'time' int(11) NOT NULL,
+  'changes' int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
