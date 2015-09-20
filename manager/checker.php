@@ -88,18 +88,18 @@
 			echo "Dammit!!<br>";
 			die();
 		}
-		$lastLine = exec("dir", $arr, $retval);
+		$lastLine = exec("ls", $arr, $retval);
 		echo '$arr = ',$arr,'<br>';
 		$retval = -1;
 		echo '$retval = ',$retval,'<br>';
 		echo '$lastLine = ',$lastLine,'<br>';
-		$cmd = "compile.sh '{$directory}{$codename}' '{$directory}{$execname}' 2>&1";
+		$cmd = "./compile.sh '{$directory}{$codename}' '{$directory}{$execname}' 2>&1";
 		echo '$cmd = ',$cmd,'<br>';
 		$lastLine = exec($cmd, $arr, $retval);
 		echo '$arr = ',$arr,'<br>';
 		echo '$retval = ',$retval,'<br>';
 		echo '$lastLine = ',$lastLine,'<br>';
-		die();
+		//die();
 		if(!$retval) {
 			$cmd1 = "run.sh '{$directory}{$execname}' '{$directory}{$outname}'";
 			echo '$cmd1 = ',$cmd1,'<br>';
@@ -167,7 +167,7 @@
 					$mysqli->error);
 			}
 		}
-		die();
+		//die();
 	}
 	$sql = "SELECT teamid, sum(status) AS score,sum(time) AS time_remaining, sum(changes) AS total_changes FROM RESULT WHERE stageid = '{$stageid}' GROUP BY teamid ORDER BY score DESC,time DESC,changes ASC";
 	$result = $mysqli->query($sql);

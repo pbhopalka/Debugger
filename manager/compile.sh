@@ -1,11 +1,11 @@
 var=$1
-fname=${var%.*}
-echo $fname
-echo "HI",$var
-ext=".out"
-ext1=".ans"
-ext2=".o"
-echo "Compiling"
+fname=$2
+echo "fname",$fname
+echo "var",$var
+#ext=".out"
+#ext1=".ans"
+#ext2=".o"
+#echo "Compiling " "$fname.o " "$var"
 gcc -Wall -o "$fname.o" "$var"
 #chmod +x "$fname.o"
 #timeout 2 ./"$fname.o" > "$fname.out"
