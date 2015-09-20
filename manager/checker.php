@@ -3,7 +3,7 @@
 	require_once("../includes/global.php");
 	require_once '../includes/class.Diff.php';
 	header('Content-type: text/html; charset=utf-8');
-	
+
 	echo '
 			<!DOCTYPE html>
 			<html>
@@ -69,7 +69,7 @@
 	$sql = "SELECT * FROM answers where stageid = '".$stageid."';";
 	echo $sql, '<br>';
 	if(!$result = $mysqli->query($sql)) {
-		die("Error" . 
+		die("Error" .
 			$mysqli->error);
 	}
 	echo php_ini_loaded_file(),"<br>";
@@ -107,11 +107,11 @@
 			echo '$retval = ',$retval,'<br>';
 			echo '$retval = ',$retval,'<br>';
 			if($retval) {
-				$sql = "INSERT INTO RESULT VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}',NULL)";
+				$sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}',NULL)";
 				$result1 = $mysqli->query($sql);
 				continue;
 			}
-			
+
 			/*$diff = Diff::compareFiles("/home/anant/debugger/submissions/".$outname,"/home/anant/debugger/answers/".$ansname);*/
 			$cmd3 = "/home/";
 			$count = 0;
@@ -122,7 +122,7 @@
 			}
 			if($count == 0) {
 				$qname = $row['stageid'] . $row['questionid'] . ".q";
-				
+
 				/*$diff = Diff::compareFiles("/home/anant/debugger/submissions/".$codename,"/home/anant/debugger/questions/".$qname);
 				 echo Diff::toHTML($diff);
 				 $count = 0;
@@ -134,17 +134,17 @@
 				$cmd2 = "changes.sh '{$codename}' '{$qname}'";
 				echo '$cmd2 = ',$cmd2 . "<br>";
 				$ret1 = intval(exec($cmd2, $arr, $retval));
-				$sql = "INSERT INTO RESULT VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',1,'{$row['time']}','{$count}')";
+				$sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',1,'{$row['time']}','{$count}')";
 				$result1 = $mysqli->query($sql);
 			} else {
-				$sql = "INSERT INTO RESULT VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}',NULL)";
+				$sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}',NULL)";
 				$result1 = $mysqli->query($sql);
 			}
-		} 
+		}
 		else {
 			$qname = $row['stageid'] . $row['questionid'] . ".q";
-			$diff = Diff::compareFiles("/home/anant/debugger/submissions/" . 
-									   $codename, "/home/anant/debugger/questions/" . 
+			$diff = Diff::compareFiles("/home/anant/debugger/submissions/" .
+									   $codename, "/home/anant/debugger/questions/" .
 									   $qname);
 			$count = 0;
 
@@ -161,15 +161,15 @@
 			//echo $arr[0]."<br>";
 			//echo $retval."<br>";
 			//echo $ret1." changes<br>";
-			$sql = "INSERT INTO RESULT VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}','{$count}')";
+			$sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}','{$count}')";
 			if(!$result1 = $mysqli->query($sql)) {
-				die("Error" . 
+				die("Error" .
 					$mysqli->error);
 			}
 		}
 		//die();
 	}
-	$sql = "SELECT teamid, sum(status) AS score,sum(time) AS time_remaining, sum(changes) AS total_changes FROM RESULT WHERE stageid = '{$stageid}' GROUP BY teamid ORDER BY score DESC,time DESC,changes ASC";
+	$sql = "SELECT teamid, sum(status) AS score,sum(time) AS time_remaining, sum(changes) AS total_changes FROM result WHERE stageid = '{$stageid}' GROUP BY teamid ORDER BY score DESC,time DESC,changes ASC";
 	$result = $mysqli->query($sql);
 	echo "<h2>Results after Stage '{$stageid}'</h2><br>";
 	$row = $result->fetch_assoc();
