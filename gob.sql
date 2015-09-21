@@ -26,6 +26,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `answers`
 --
 
+use test;
+
 CREATE TABLE IF NOT EXISTS `answers` (
   `teamid` varchar(7) NOT NULL,
   `questionid` varchar(2) NOT NULL,
@@ -82,10 +84,10 @@ CREATE TABLE IF NOT EXISTS `teams` (
 -- Table Structure for table 'manager'
 --
 
-CREATE TABLE IF NOT EXISTS 'manager' (
-  'username' varchar(20) NOT NULL,
-  'password' varchar(20) NOT NULL,
-  PRIMARY KEY ('username')
+CREATE TABLE IF NOT EXISTS `manager` (
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ---------------------------------------------------------
@@ -94,13 +96,13 @@ CREATE TABLE IF NOT EXISTS 'manager' (
 -- Table Structure for table 'result'
 --
 
-CREATE TABLE IF NOT EXISTS 'result' (
-  'teamid' varchar(20) NOT NULL,
-  'stageid' varchar(5) NOT NULL,
-  'questionid' int(11) NOT NULL,
-  'status' int(11) NOT NULL,
-  'time' int(11) NOT NULL,
-  'changes' int(11) DEFAULT NULL
+CREATE TABLE IF NOT EXISTS `result` (
+  `teamid` varchar(20) NOT NULL,
+  `stageid` varchar(5) NOT NULL,
+  `questionid` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `changes` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
