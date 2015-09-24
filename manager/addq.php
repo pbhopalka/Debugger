@@ -86,9 +86,9 @@ $answer = $_POST['answer'];
 $sql = "INSERT INTO questions VALUES('{$stageid}','{$questionid}','{$question}')";
 if (!$result=$mysqli->query($sql)) {die("Error".$mysqli->error);}
 $fname = $stageid.$questionid.".q";
-$i = file_put_contents("/home/anant/debugger/questions/".$fname,$question);
+$i = file_put_contents("questions/".$fname,$question);
 $fname1 = $stageid.$questionid.".ans";
-$i = file_put_contents("/home/anant/debugger/answers/".$fname,$answer);
+$i = file_put_contents("answers/".$fname,$answer);
 header('Location: addq.php');
 }
 ?>
