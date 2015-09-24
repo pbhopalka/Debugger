@@ -1,15 +1,15 @@
 {
  "m_name": "Debugger",
  "m_isActive": true,
- "m_importFileSpec": "*.php;*.inc;*.phtml;*.js;*.html;*.css;*.scss;*.json;*.xml;*.ini;*.md;*.txt;*.text;.htaccess;*.sh;*.sql",
+ "m_importFileSpec": "*.php;*.inc;*.phtml;*.js;*.html;*.css;*.scss;*.json;*.xml;*.ini;*.md;*.txt;*.text;.htaccess;*.sh;*.sql;*.ini",
  "m_excludeFolders": ".git;.svn;.codelite;.clang",
  "settings": {
   "m_runAs": 1,
   "m_phpExe": "",
-  "m_indexFile": "G:\\work\\Athena\\public_html\\Debugger\\index.html",
+  "m_indexFile": "G:\\work\\Athena\\public_html\\Debugger\\includes\\connection.php",
   "m_args": "",
   "m_workingDirectory": "",
-  "m_projectURL": "http://athena.nitc.ac.in/suraj_b130487cs/Debugger/",
+  "m_projectURL": "http://localhost/Debugger/index.php",
   "m_includePath": "",
   "m_ccIncludePath": "",
   "m_flags": 5,

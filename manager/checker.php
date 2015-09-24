@@ -1,10 +1,9 @@
 <?php
 
-	require_once("../includes/global.php");
-	require_once '../includes/class.Diff.php';
-	header('Content-type: text/html; charset=utf-8');
-
-	echo '
+require_once("../includes/global.php");
+require_once '../includes/class.Diff.php';
+header('Content-type: text/html; charset=utf-8');
+echo '
 			<!DOCTYPE html>
 			<html>
 			<head>
@@ -13,11 +12,11 @@
 				<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 				<link href="../css/main.css" rel="stylesheet" media="screen">
 			';
-	if(!isset($_SESSION['admin']))
-		header('Location: login.php')&& die();
-	if(!isset($_POST["stage"])) {
+if(!isset($_SESSION['admin']))
+	header('Location: login.php')&& die();
+if(!isset($_POST["stage"])) {
 
-?>
+	?>
 <script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
@@ -43,7 +42,6 @@
 <?php
 
 } else {
-
 	echo '<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	 </head>
 	 <body>
@@ -68,42 +66,38 @@
 	$mysqli->query($delete);
 	$stageid = $_POST['stage'];
 	echo $stageid, '<br>';
-	$sql = "SELECT * FROM answers where stageid = '".$stageid."';";
+	$sql = "SELECT * FROM answers where stageid = '" . $stageid . "';";
 	echo $sql, '<br>';
 	if(!$result = $mysqli->query($sql)) {
 		die("Error" .
 			$mysqli->error);
 	}
-	echo php_ini_loaded_file(),"<br>";
 	while($row = mysqli_fetch_array($result)) {
 		$fname = $row['teamid'] . $row['stageid'] . $row['questionid'];
-		$sth = exec('whoami', $arr, $retval);
-		echo $sth,'<br>';
-		echo $arr, '<br>';
-		echo $fname,'<br>';
 		$directory = "submissions/";
 		$codename = $fname . ".c";
 		$execname = $fname . ".o";
 		$outname = $fname . ".out";
 		$ansname = $row['stageid'] . $row['questionid'] . ".ans";
-		echo "FileName = ",$directory.$codename,'<br>';
-		$i = file_put_contents($directory.$codename, $row['ans']);
-		echo '$i Type = ',gettype($i),'<br>';
-		if($i === FALSE){
+		echo "FileName = ", $directory . $codename, '<br>';
+		$i = file_put_contents($directory .
+							   $codename, $row['ans']);
+		echo '$i Type = ', gettype($i), '<br>';
+		if($i === FALSE) {
 			echo "Dammit!!<br>";
 			die();
 		}
 		$lastLine = exec("ls", $arr, $retval);
-		echo '$arr = ',$arr,'<br>';
-		$retval = -1;
-		echo '$retval = ',$retval,'<br>';
-		echo '$lastLine = ',$lastLine,'<br>';
+		echo '$arr = ', $arr, '<br>';
+		$retval = - 1;
+		echo '$retval = ', $retval, '<br>';
+		echo '$lastLine = ', $lastLine, '<br>';
 		$cmd = "./compile.sh '{$directory}{$codename}' '{$directory}{$execname}' 2>&1";
-		echo '$cmd = ',$cmd,'<br>';
+		echo '$cmd = ', $cmd, '<br>';
 		$lastLine = exec($cmd, $arr, $retval);
-		echo '$arr = ',$arr,'<br>';
-		echo '$retval = ',$retval,'<br>';
-		echo '$lastLine = ',$lastLine,'<br>';
+		echo '$arr = ', $arr, '<br>';
+		echo '$retval = ', $retval, '<br>';
+		echo '$lastLine = ', $lastLine, '<br>';
 		//die();
 		if(!$retval) {
 			$cmd1 = "./run.sh '{$directory}{$execname}' '{$directory}{$outname}'";
@@ -117,7 +111,6 @@
 				$result1 = $mysqli->query($sql);
 				continue;
 			}
-
 			$diff = Diff::compareFiles("submissions/".$outname,"answers/".$ansname);
 			$cmd3 = "/home/";
 			$count = 0;
@@ -129,18 +122,10 @@
 			echo 'count = ',$count,"<br>";
 			if($count == 0) {
 				$qname = $row['stageid'] . $row['questionid'] . ".q";
-
 				$diff = Diff::compareFiles("submissions/".$codename,"questions/".$qname);
-				 echo Diff::toHTML($diff);
-				 $count = 0;
-				 foreach ($diff as $a)
-				 {
-				 if($a[1] == Diff::INSERTED || $a[1] == Diff::DELETED)
-				 $count = $count + 1;
-				 }
-				//$cmd2 = "./changes.sh '{$codename}' '{$qname}'";
-				//echo '$cmd2 = ',$cmd2 . "<br>";
-				//$ret1 = intval(exec($cmd2, $arr, $retval));
+				$cmd2 = "./changes.sh '{$codename}' '{$qname}'";
+				echo '$cmd2 = ', $cmd2 . "<br>";
+				$ret1 = intval(exec($cmd2, $arr, $retval));
 				$sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',1,'{$row['time']}','{$count}')";
 				$result1 = $mysqli->query($sql);
 			}
@@ -151,7 +136,6 @@
 				$sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}',NULL)";
 				$result1 = $mysqli->query($sql);
 			}
-
 		}
 		else {
 			echo 'Gone to else part';
@@ -215,5 +199,6 @@
 		echo '</table></div>';
 	}
 	echo '</html>';
-	}
+}
+
 ?>

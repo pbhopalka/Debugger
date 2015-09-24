@@ -7,6 +7,7 @@ require_once("includes/global.php");
 		metadetails();
 		echo '</head>';
 		echo '<body>';
+		echo '<a href="logout.php">Logout</a>';
 		$res1 = $mysqli->query("SELECT * FROM `stages` WHERE `stageid` = '{$_SESSION['stage']}'");
 		$res1 = $res1->fetch_assoc();
 		$_SESSION['questionid'] = 1;
