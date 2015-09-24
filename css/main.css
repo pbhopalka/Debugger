@@ -3,7 +3,7 @@ html {
 	height: 100%;
 }
 body {
-	background: url('../img/bg.jpg') no-repeat center center fixed;
+	background: url('../img/old_bg.jpg') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -126,21 +126,20 @@ body {
 #paginator, #submitsol, #compilesol  {
 	width: 200px;
 	position: absolute;
-	margin: auto !important;
+	/*margin: auto !important;*/
 }
 
 #paginator {
-	left: 15%;
-	top: 510px;
+/*	top: 510px;*/
+	left: 2.5%;*/
 }
 
 #submitsol {
 	left: 43%;
-	top: 530px;
+/*	top: 530px;*/
 }
 
 #compilesol {
 	left: 43%;
 	top: 580px;
 }
-

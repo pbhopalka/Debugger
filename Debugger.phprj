@@ -6,10 +6,10 @@
  "settings": {
   "m_runAs": 1,
   "m_phpExe": "",
-  "m_indexFile": "G:\\work\\Athena\\public_html\\Debugger\\includes\\connection.php",
+  "m_indexFile": "G:\\work\\Athena\\public_html\\Debugger\\question.php",
   "m_args": "",
   "m_workingDirectory": "",
-  "m_projectURL": "http://localhost/Debugger/index.php",
+  "m_projectURL": "",
   "m_includePath": "",
   "m_ccIncludePath": "",
   "m_flags": 5,

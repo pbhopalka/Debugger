@@ -21,7 +21,7 @@ if(!isset($_POST["stage"])) {
 </head>
 
 <body>
-<h3>Check Solutions</h3>
+<h3>UnCheck Solutions</h3>
 <br>
 <form action="" method="POST" class="form-horizontal" role="form">
 <select name="stage">

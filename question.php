@@ -13,7 +13,7 @@ require_once("includes/global.php");
 		$_SESSION['questionid'] = 1;
 		if ($res1['type'] == "syntax" || $res1['type'] == "logical" || $res1['type'] == "obfuscated") {			
 		?>
-			<div id="content" class="box" style="width: 70%; height: 400px; top: 50px; "></div>
+			<div id="content" class="box" style="width: 90%; height: 500px; top: 40px; "></div>
 			<div id="paginator" class="pagination">	
 				<ul>	
 					<li id = "1" onclick="GetQuestion('question.php', '<?php echo $_SESSION['stage']; ?>', '1', ace.edit('content').getValue(), this.id);"><a href="#" id="a1">1</a></li>  
@@ -29,7 +29,7 @@ require_once("includes/global.php");
 			<?php
 				if ($_SESSION['stage'] != '3a' && $_SESSION['stage'] != '3b')  {
 					echo "<button id=\"resetAnswer\" onclick=\"ResetAns('question.php', '{$_SESSION['stage']}')\" class=\"btn btn-large btn-danger\" style=\"position: absolute; right: 1%; bottom: 5%; width: 200px;\" >Reset Answer</button>";
-					echo "<button id=\"submitsol\" onclick=\"SubmitAns('question.php', '{$_SESSION['stage']}')\" class=\"btn btn-large btn-success\" style=\"width: 200px;\" >Submit Solutions</button>";
+					echo "<button id=\"submitsol\" onclick=\"SubmitAns('question.php', '{$_SESSION['stage']}')\" class=\"btn btn-large btn-success\" style=\"position: absolute; right: 50%; bottom: 5%; width: 200px;\" >Submit Solutions</button>";
 				}
 				//if ($_SESSION['stage'] == '2a' || $_SESSION['stage'] == '2b') {
 				//	echo "<button id=\"compilesol\" onclick=\"CompileCheck()\" class=\"btn btn-large btn-success\" style=\"width: 200px;\" >Compile & Check</button>";	
