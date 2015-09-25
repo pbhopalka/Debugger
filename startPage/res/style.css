@@ -1,77 +1,78 @@
-#intro{
-  position:absolute;
-  top:45%;
-  left:40%;
-  margin:-160px 0 0 -390px;
+#intro {
+	position: absolute;
+	top: 45%;
+	left: 40%;
+	margin: -160px 0 0 -390px;
 }
 
-#intro h1{
-  margin-top:34px;
-  cursor:default;
+#intro h1 {
+	margin-top: 34px;
+	cursor: default;
 }
 
-#intro span{
-  opacity:0;
+#intro span {
+	opacity: 0;
 }
 
-span.claim{
-  font-family:"Arial";
-  font-size:300px;
-  line-height:226px;
-  color:#06afa2;
-  letter-spacing:-3px;
-  float:left;
-  margin-right:20px;
-  cursor:default;
+span.claim {
+	font-family: "Arial";
+	font-size: 300px;
+	line-height: 226px;
+	color: #06afa2;
+	letter-spacing: -3px;
+	float: left;
+	margin-right: 20px;
+	cursor: default;
 }
 
-h1{
-  font-family:"TitilliumText22LThThin";
-  font-weight:100;
-  font-size:45px;
-  line-height:51px;
-  color:#999;
-  letter-spacing:-3px;
-  float:left;
+h1 {
+	font-family: "TitilliumText22LThThin";
+	font-weight: 100;
+	font-size: 45px;
+	line-height: 51px;
+	color: #999;
+	letter-spacing: -3px;
+	float: left;
 }
 
-h3{
-  font-family:"TitilliumText22LThThin";
-  font-weight:100;
-  font-size:35px;
-  line-height:51px;
-  color:#845;
-  letter-spacing:-3px;
-  float:left;
+h3 {
+	font-family: "TitilliumText22LThThin";
+	font-weight: 100;
+	font-size: 35px;
+	line-height: 51px;
+	color: #845;
+	letter-spacing: -3px;
+	float: left;
 }
 
-.grey{
-  color:#333;
+.grey {
+	color: #333;
 }
 
-.green{
-  color:#06afa2;
+.green {
+	color: #06afa2;
 }
 
 a {
-  font-family:"Abel","HelveticaNeue Light","TitilliumText22LThThin","Lucida Grande";
-  text-decoration:none;
-  color:blue;
+	font-family: "Abel", "HelveticaNeue Light", "TitilliumText22LThThin",
+		"Lucida Grande";
+	text-decoration: none;
+	color: blue;
 }
 
 strong {
-  color:#666;
+	color: #666;
 }
 
-a:hover{
-  cursor:pointer;
+a:hover {
+	cursor: pointer;
 }
 
 @font-face {
-  font-family: 'Abel';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Abel'),
-  local('Abel-Regular'),
-  url(http://themes.googleusercontent.com/static/fonts/abel/v4/EAqh528fFdbUek8UOky4sA.woff) format('woff');
+	font-family: 'Abel';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Abel'), local('Abel-Regular'),
+		url(http://themes.googleusercontent.com/static/fonts/abel/v4/EAqh528fFdbUek8UOky4sA.woff)
+		format('woff');
 }

@@ -1,30 +1,32 @@
 <?php
-require_once("includes/global.php");
-session_start();
-echo 'the Team ID is ' , $_SESSION['teamid'];
-echo '<br>the status is ' , $_SESSION['status'];
-if (!isset($_SESSION['teamid'])) header("Location: login.php") && die();
-elseif ($_SESSION['status'] == 2) header("Location: question.php") && die();
-elseif ($_SESSION['status'] == 3) header("Location: done.php") && die();
-	metadetails();
+require_once ("includes/global.php");
+session_start ();
+echo 'the Team ID is ', $_SESSION ['teamid'];
+echo '<br>the status is ', $_SESSION ['status'];
+if (! isset ( $_SESSION ['teamid'] ))
+	header ( "Location: login.php" ) && die ();
+elseif ($_SESSION ['status'] == 2)
+	header ( "Location: question.php" ) && die ();
+elseif ($_SESSION ['status'] == 3)
+	header ( "Location: done.php" ) && die ();
+metadetails ();
 ?>
-  </head>
-  <body>
-  	<div id="main-content" class="box center">
+</head>
+<body>
+	<div id="main-content" class="box center">
   		<?php
-  			if ($_SESSION['language'] == 1 || $_SESSION['language'] == 2) {
-				if ($_SESSION['stage'] == '0') {
-					if ($_SESSION['language'] == 1) {
-						echo('<h2>printf("%s","Hey C Coders!");</h2><br/>');
-						GetInstructions('c');
-					} else {
-						echo('<h2>cout<<"Howdy C++ Aficionados!";</h2><br/>');
-						GetInstructions('cpp');
-					}
-				}
-				elseif ($_SESSION['stage'] == '2a' || $_SESSION['stage'] == '2b') {
-					echo '<h2>Welcome to Stage 2!!</h2><br/>';
-					echo '
+				if ($_SESSION ['language'] == 1 || $_SESSION ['language'] == 2) {
+					if ($_SESSION ['stage'] == '0') {
+						if ($_SESSION ['language'] == 1) {
+							echo ('<h2>printf("%s","Hey C Coders!");</h2><br/>');
+							GetInstructions ( 'c' );
+						} else {
+							echo ('<h2>cout<<"Howdy C++ Aficionados!";</h2><br/>');
+							GetInstructions ( 'cpp' );
+						}
+					} elseif ($_SESSION ['stage'] == '2a' || $_SESSION ['stage'] == '2b') {
+						echo '<h2>Welcome to Stage 2!!</h2><br/>';
+						echo '
 						<ul id="Rules">
 							<li>The second round will be an offline round of 30 minutes.</li>
 							<li>You will be given 3 questions with logical errors.</li>
@@ -35,18 +37,16 @@ elseif ($_SESSION['status'] == 3) header("Location: done.php") && die();
 							<li>Any act of dishonesty will result in immediate disqualification.</li>
 							<li>The Decision of the Judges is final & beyond reproach.</li>
 						</ul>';
-					$queryString = "SELECT * FROM stages WHERE stageid = '{$_SESSION['stage']}' AND stageStart = 1;";
-					$result = $mysqli->query($queryString);
-					if($result->num_rows){
-						echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\">Lets Start!</button>";
-					}
-					else{
-						echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\" disabled>Lets Start!</button>";
-					}
-  			}
-				elseif ($_SESSION['stage'] == '3a' || $_SESSION['stage'] == '3b') {
-					echo '<h2>Welcome to Stage 3!!</h2><br/>';
-					echo '
+						$queryString = "SELECT * FROM stages WHERE stageid = '{$_SESSION['stage']}' AND stageStart = 1;";
+						$result = $mysqli->query ( $queryString );
+						if ($result->num_rows) {
+							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\">Lets Start!</button>";
+						} else {
+							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\" disabled>Lets Start!</button>";
+						}
+					} elseif ($_SESSION ['stage'] == '3a' || $_SESSION ['stage'] == '3b') {
+						echo '<h2>Welcome to Stage 3!!</h2><br/>';
+						echo '
 						<ul id="Rules">
 							<li>The Third round will be an offline round of 1 hour.</li>
 							<li>You will be given 2 questions with no errors.</li>
@@ -58,28 +58,28 @@ elseif ($_SESSION['status'] == 3) header("Location: done.php") && die();
 							<li>The Decision of the Judges is final & beyond reproach.</li>
 						</ul>';
 						$queryString = "SELECT * FROM stages WHERE stageid = '{$_SESSION['stage']}' AND stageStart = 1;";
-						$result = $mysqli->query($queryString);
-						if($result->num_rows){
+						$result = $mysqli->query ( $queryString );
+						if ($result->num_rows) {
 							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\">Lets Start!</button>";
-						}
-						else{
+						} else {
 							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\" disabled>Lets Start!</button>";
 						}
+					}
+				} else {
+					?>
+				<h2>Welcome to Debugger !!</h2>
+		<br> <span style="font-size: 1.5em"> Are you ready to start ? Select
+			your language of Choice and go through the Rules &#38; Instructions.</span>
+		<div id="clang" onclick="AjaxGet('lang.php?lang=c', 'main-content');"></div>
+		<div id="cpplang"
+			onclick="AjaxGet('lang.php?lang=cpp', 'main-content');"></div>
+	</div>
+
+  	<?php
 				}
-
-  			}
-			else {
+				AjaxGet ();
 				?>
-				<h2>Welcome to Debugger !!</h2><br/>
-				<span style="font-size: 1.5em"> Are you ready to start ? Select your language of Choice and go through the Rules & Instructions.</span></br/>
-				<div id="clang" onclick="AjaxGet('lang.php?lang=c', 'main-content');"></div>
-				<div id="cpplang" onclick="AjaxGet('lang.php?lang=cpp', 'main-content');"></div>
-				</div>
-
-  	<?php }
-  		AjaxGet();
-  	?>
     <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </body>
+	<script src="js/bootstrap.min.js"></script>
+</body>
 </html>
