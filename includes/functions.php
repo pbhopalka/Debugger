@@ -1,22 +1,17 @@
 <?php
-require_once("config.php");
-
-
-	function metadetails() {
-		header('Content-type: text/html; charset=utf-8');
-		echo <<<CONTENT
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Debugger</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/main.css" rel="stylesheet" media="screen">
-CONTENT;
+require_once ("config.php");
+function metadetails() {
+	header ( 'Content-type: text/html; charset=utf-8' );
+	echo '<!DOCTYPE html>
+                    <html>
+                      <head>
+                          <title>Debugger</title>
+                              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                              <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+                              <link href="css/main.css" rel="stylesheet" media="screen">';
 }
-
-	function AjaxGet() {
-		echo <<<CONTENT
+function AjaxGet() {
+	echo <<<CONTENT
 		<script>
 			function AjaxGet(a, b) {
 				Req = new XMLHttpRequest();
@@ -33,10 +28,9 @@ CONTENT;
 			}
 		</script>
 CONTENT;
-	}
-
-	function GetInstructions($lang) {
-			echo <<<CONTENT
+}
+function GetInstructions($lang) {
+	echo <<<CONTENT
 				<ul id="Rules">
 					<li>The first round will be an offline round of 30 minutes.</li>
 					<li>You will be given 4 questions with syntax errors.</li>
@@ -51,5 +45,5 @@ CONTENT;
 				</ul>
 				<button class="btn btn-large btn-primary centerh" onclick="window.location.href = 'starttest.php'" style="width: 150px;" id="btn-start">Lets Start!</button>
 CONTENT;
-	}
+}
 ?>

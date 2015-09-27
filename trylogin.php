@@ -1,30 +1,30 @@
 <?php
-require_once("includes/global.php");
-if (!isset($_POST['teamid']) || !isset($_POST['password'])) header("Location: login.php") && die();
+require_once ("includes/global.php");
+if (! isset ( $_POST ['teamid'] ) || ! isset ( $_POST ['password'] ))
+	header ( "Location: login.php" ) && die ();
 echo "<h2>";
 
-	$stmt = $mysqli->prepare("SELECT `status`, `stage`, `language` FROM `teams` WHERE `teamid` = ? AND `password` = ?");
+$stmt = $mysqli->prepare ( "SELECT `status`, `stage`, `language` FROM `teams` WHERE `teamid` = ? AND `password` = ?" );
 
-//	$teamid = mysql_real_escape_string($_POST['teamid']);
-//	$password = mysql_real_escape_string($_POST['password']);
+// $teamid = mysql_real_escape_string($_POST['teamid']);
+// $password = mysql_real_escape_string($_POST['password']);
 
-	$teamid = $_POST['teamid'];
-	$password = $_POST['password'];
+$teamid = $_POST ['teamid'];
+$password = $_POST ['password'];
 
-
-	$stmt->bind_param("ss", $teamid, $password);
-	$stmt->execute();
-	$Status = "No";
-	$stmt->store_result();
-	$stmt->bind_result($status, $stage, $language);
-	$stmt->fetch();
-	if ($stmt->num_rows == 1) {
-		$_SESSION['teamid'] = $_POST['teamid'];
-		$_SESSION['status'] = $status;
-		$_SESSION['stage'] = $stage;
-		$_SESSION['language'] = $language;
-		$Status = "YES";
-	}
-	echo $Status;
+$stmt->bind_param ( "ss", $teamid, $password );
+$stmt->execute ();
+$Status = "No";
+$stmt->store_result ();
+$stmt->bind_result ( $status, $stage, $language );
+$stmt->fetch ();
+if ($stmt->num_rows == 1) {
+	$_SESSION ['teamid'] = $_POST ['teamid'];
+	$_SESSION ['status'] = $status;
+	$_SESSION ['stage'] = $stage;
+	$_SESSION ['language'] = $language;
+	$Status = "YES";
+}
+echo $Status;
 echo "</h2>";
 ?>
