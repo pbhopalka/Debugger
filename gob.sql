@@ -92,6 +92,19 @@ CREATE TABLE IF NOT EXISTS `manager` (
 
 -- ---------------------------------------------------------
 
+-- ---------------------------------------------------------
+
+--
+-- Table Structure for table 'quiz'
+--
+
+CREATE TABLE quiz (
+`teamid` varchar(7) NOT NULL,
+`stageid` varchar(2) NOT NULL,
+`timeLeft` tinyint(4) NOT NULL,
+PRIMARY KEY (`teamid`,`stageid`));
+-- ---------------------------------------------------------
+
 --
 -- Table Structure for table 'result'
 --
