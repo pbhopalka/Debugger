@@ -87,8 +87,7 @@ if (! isset ( $_POST ['op'] )) {
                 }, 1000);
                 timer_count -= 1;
                 if (timer_count % 10 == 9)
-                    Sync('question.php', '<?php echo $_SESSION['
-                        stage '] ?>', timer_count);
+                    Sync('question.php', '<?php echo $_SESSION['stage'] ?>', timer_count);
             } else
                 timer_end(true);
         }
@@ -102,8 +101,7 @@ if (! isset ( $_POST ['op'] )) {
         }
 
         function timer_end(go) {
-            SubmitAns('question.php', '<?php echo $_SESSION['
-                stage ']; ?>', 3);
+            SubmitAns('question.php', '<?php echo $_SESSION['stage']; ?>', 3);
         }
 
         function Ace() {
@@ -179,8 +177,7 @@ if (! isset ( $_POST ['op'] )) {
                     });
             }
         }
-        GetQuestion('question.php', '<?php echo $_SESSION['
-            stage '] ?>', '1', '', 1);
+        GetQuestion('question.php', '<?php echo $_SESSION['stage'] ?>', '1', '', 1);
         start_timer(<?php echo $time; ?>);
     </script>
     <?php
