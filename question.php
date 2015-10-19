@@ -68,7 +68,6 @@ if (! isset ( $_POST ['op'] )) {
     <script type="text/javascript">
         timer_active = false,
             timer_count = 0;
-
         function timer() {
             var sec_num = timer_count;
             var hours = Math.floor(sec_num / 3600);
@@ -120,6 +119,7 @@ if (! isset ( $_POST ['op'] )) {
                 function (data) {
                     //val1 = data.getElementById
                     ace.edit('content').setValue(data);
+					ace.edit('content').clearSelection();
                 });
             var i = 1;
             while (i < 5) {
@@ -156,6 +156,7 @@ if (! isset ( $_POST ['op'] )) {
                 },
                 function (data) {
                     ace.edit('content').setValue(data);
+					ace.edit('content').clearSelection();
                 });
         }
 
