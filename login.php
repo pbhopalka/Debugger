@@ -11,12 +11,13 @@ metadetails ();
 	<div id="form-signin-container">
 		<form id="form-signin" class="box" action="" method="POST">
 			<h2 id="form-signin-heading">Please Sign In</h2>
-			<div class="input-prepend">
-				<span class="add-on">DEB</span> <input class="span2" name="teamid"
+			<div class="input-group" style="padding: 10px 0 10px 0;">
+				<span class="input-group-addon">DEB</span> <input class="form-control" name="teamid"
 					id="teamid" type="text" placeholder="Team ID">
 			</div>
 			<input type="password" id="password" name="password"
-				class="input-block-level" placeholder="Password">
+				class="form-control" placeholder="Password" style="margin-bottom: 10px;">
+				<br>
 			<button class="btn btn-large btn-primary centerh"
 				style="width: 100px;" id="btn-login" type="submit">Sign in</button>
 		</form>
@@ -54,7 +55,7 @@ metadetails ();
 
 </body>
 </html>
-<!--<?php 
+<!--<?php
 /*
            * else { $teamid = $_POST['teamid']; $pass = $_POST['password']; $sql = "SELECT * FROM teams WHERE teamid = '{$teamid}' AND password = '{$pass}'"; $result = $mysqli->query($sql); if($result->num_rows == 1) { $_SESSION['teamid'] = $_POST['teamid']; $_SESSION['status'] = $status; $_SESSION['stage'] = $stage; $_SESSION['language'] = $language; header('Location: index.php'); } else { header('Location: login.php'); } }
            */

@@ -1,12 +1,12 @@
 <?php
 require_once ("includes/global.php");
-if (! isset ( $_SESSION ['teamid'] )) { 
+if (! isset ( $_SESSION ['teamid'] )) {
 	// If Not Logged In
 	header ( "Location: login.php" ) && die ();
-} elseif ($_SESSION ['status'] < 2) { 
+} elseif ($_SESSION ['status'] < 2) {
 	// If Not Started
 	header ( "Location: index.php" ) && die ();
-} elseif (! isset ( $_SESSION ['stage'] )) { 
+} elseif (! isset ( $_SESSION ['stage'] )) {
 	// No Idea yet what it does
 	header ( "Location: index.php" ) && die ();
 }
@@ -29,11 +29,11 @@ if (! isset ( $_POST ['op'] )) {
 		$quizResultRow = $quizResult->fetch_assoc ();
 		$time = $quizResultRow ['timeLeft'];
 		echo  $time,'<br>';
-		
+
 ?>
 
     <div style="width: 90%; top: 40px; margin: auto">
-        <div id="content" class="box" style="height: 500px;"></div>
+        <div id="content" class="box" style="height: 70vh;"></div>
         <?php
 			$quesQuery = "SELECT COUNT(*) FROM `questions` WHERE `stageid`='{$_SESSION['stage']}'";
 //			echo $quesQuery,'<br>';
@@ -44,13 +44,13 @@ if (! isset ( $_POST ['op'] )) {
 				$noOfQuestions = $quesResultRow['COUNT(*)'];
 			}
 	?>
-            <div id="paginator" class="pagination">
-                <ul>
+            <div >
+                <ul id="paginator" class="pagination">
                     <?php
 			for ($i = 1; $i<=$noOfQuestions; $i=$i+1) {
 //				echo $i,'<br>';
 				echo "<li id='{$i}' onclick=\"GetQuestion('question.php', '{$_SESSION['stage']}', '{$i}', ace.edit('content').getValue(),this.id);\"><a href=\"#\" id=\"a{$i}\">{$i}</a></li>";
-			} 
+			}
 			?>
                 </ul>
             </div>
@@ -84,8 +84,8 @@ if (! isset ( $_POST ['op'] )) {
                 setTimeout(function () {
                     timer();
                 }, 1000);
-                timer_count -= 1;
-                if (timer_count % 10 == 9)
+                //timer_count -= 1;
+                if (timer_count % 10 == 8)
                     Sync('question.php', '<?php echo $_SESSION['stage'] ?>', timer_count);
             } else
                 timer_end(true);
@@ -119,7 +119,7 @@ if (! isset ( $_POST ['op'] )) {
                 function (data) {
                     //val1 = data.getElementById
                     ace.edit('content').setValue(data);
-					ace.edit('content').clearSelection();
+										ace.edit('content').clearSelection();
                 });
             var i = 1;
             while (i < 5) {
@@ -248,7 +248,7 @@ if (! isset ( $_POST ['op'] )) {
 		}
 //		echo $_POST ['ans'];
 		$res = $mysqli->query ( "SELECT * FROM `answers` WHERE `teamid` = '{$_SESSION['teamid']}' AND `stageid` = '{$_POST['stage']}' AND `questionid` = '{$_SESSION['questionid']}'" );
-		echo $_SESSION['questionid'],'<br>';
+		//echo $_SESSION['questionid'],'<br>';
 		$res = $res->fetch_assoc ();
 		echo $res ['ans'];
 	}

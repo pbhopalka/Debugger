@@ -29,12 +29,11 @@ function AjaxGet() {
 		</script>
 CONTENT;
 }
-function GetInstructions($lang) {
-	echo <<<CONTENT
+function GetInstructions($lang) {?>
 				<ul id="Rules">
-					<li>The first round will be an offline round of 30 minutes.</li>
+					<li>The first round will be of 30 minutes.</li>
 					<li>You will be given 4 questions with syntax errors.</li>
-					<li>Your answer should not contain any <strong> errors or warnings <strong> when compiled with gcc/g++ compiler.</li>
+					<li>Your answer should not contain any <strong> errors or warnings </strong> when compiled with gcc/g++ compiler.</li>
 					<li>Use of Compilers is prohibited.</li>
 					<li>Marks will be provided based on the time of completion and correctness of solution.</li>
 					<li>All Answers will be locked and cannot be altered after 30 minutes.</li>
@@ -43,7 +42,7 @@ function GetInstructions($lang) {
 					<li>If any doubts, please ask the event managers before proceeding.</li>
 					<li>The Decision of the Judges is final & beyond reproach.</li>
 				</ul>
-				<button class="btn btn-large btn-primary centerh" onclick="window.location.href = 'starttest.php'" style="width: 150px;" id="btn-start">Lets Start!</button>
-CONTENT;
+				<button class="btn btn-large btn-primary centerh" onclick="window.location.href = 'starttest.php'" style="width: 150px;" id="btn-start">Lets Start!</button><br>
+<?php
 }
 ?>

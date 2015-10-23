@@ -18,7 +18,7 @@ metadetails ();
 				if ($_SESSION ['language'] == 1 || $_SESSION ['language'] == 2) {
 					if ($_SESSION ['stage'] == '0') {
 						if ($_SESSION ['language'] == 1) {
-							echo ('<h2>printf("%s","Hey C Coders!");</h2><br/>');
+							echo ('<h2>printf("Hey C Coders!");</h2><br/>');
 							GetInstructions ( 'c' );
 						} else {
 							echo ('<h2>cout<<"Howdy C++ Aficionados!";</h2><br/>');
@@ -40,9 +40,9 @@ metadetails ();
 						$queryString = "SELECT * FROM stages WHERE stageid = '{$_SESSION['stage']}' AND stageStart = 1;";
 						$result = $mysqli->query ( $queryString );
 						if ($result->num_rows) {
-							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\">Lets Start!</button>";
+							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\">Lets Start!</button><br>";
 						} else {
-							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\" disabled>Lets Start!</button>";
+							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\" disabled>Lets Start!</button><br>";
 						}
 					} elseif ($_SESSION ['stage'] == '3a' || $_SESSION ['stage'] == '3b') {
 						echo '<h2>Welcome to Stage 3!!</h2><br/>';
@@ -60,9 +60,9 @@ metadetails ();
 						$queryString = "SELECT * FROM stages WHERE stageid = '{$_SESSION['stage']}' AND stageStart = 1;";
 						$result = $mysqli->query ( $queryString );
 						if ($result->num_rows) {
-							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\">Lets Start!</button>";
+							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\">Lets Start!</button><br>";
 						} else {
-							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\" disabled>Lets Start!</button>";
+							echo "<button class=\"btn btn-large btn-primary centerh\" onclick=\"window.location.href = 'starttest.php'\" style=\"width: 150px;\" id=\"btn-start\" disabled>Lets Start!</button><br>";
 						}
 					}
 				} else {
