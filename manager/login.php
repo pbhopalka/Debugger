@@ -22,12 +22,13 @@ if (! isset ( $_POST ["username"] )) {
 	<div id="form-signin-container">
 		<form id="form-signin" class="box" action="" method="POST">
 			<h2 id="form-signin-heading">Please Sign In</h2>
-			<div class="input-prepend">
-				<span class="add-on">ID</span> <input class="span2" name="username"
-					id="teamid" type="text" placeholder="Manager ID">
+			<div class="input-group" style="padding: 10px 0 10px 0;">
+				<span class="input-group-addon">ID</span> <input class="span2" name="username"
+					id="manager" type="text" placeholder="Manager ID">
 			</div>
 			<input type="password" id="password" name="password"
-				class="input-block-level" placeholder="Password">
+				class="form-control" placeholder="Password" style="margin-bottom: 10px;">
+			<br>
 			<button class="btn btn-large btn-primary centerh"
 				style="width: 100px;" id="btn-login" type="submit">Sign in</button>
 		</form>
