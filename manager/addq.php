@@ -87,6 +87,7 @@ if (! isset ( $_POST ["q"] )) {
   $question = $mysqli->real_escape_string($question);
   $answer = $mysqli->real_escape_string($answer);
 	$sql = "INSERT INTO questions VALUES('{$stageid}','{$questionid}','{$question}')";
+	echo $sql, '<br>';
 	if (! $result = $mysqli->query ( $sql )) {
 		die ( "Error" . $mysqli->error );
 	}

@@ -84,7 +84,7 @@ if (! isset ( $_POST ['op'] )) {
                 setTimeout(function () {
                     timer();
                 }, 1000);
-                //timer_count -= 1;
+                timer_count -= 1;
                 if (timer_count % 10 == 8)
                     Sync('question.php', '<?php echo $_SESSION['stage'] ?>', timer_count);
             } else
@@ -119,7 +119,7 @@ if (! isset ( $_POST ['op'] )) {
                 function (data) {
                     //val1 = data.getElementById
                     ace.edit('content').setValue(data);
-										ace.edit('content').clearSelection();
+					ace.edit('content').clearSelection();
                 });
             var i = 1;
             while (i < 5) {
@@ -136,6 +136,7 @@ if (! isset ( $_POST ['op'] )) {
 
         function Sync(a, b, c) {
             position = ace.edit('content').getCursorPosition();
+            lineNumber = ace.edit('content').getFirstVisibleRow();
             $.post(a, {
                     stage: b,
                     timeLeft: c,
@@ -146,6 +147,8 @@ if (! isset ( $_POST ['op'] )) {
                     ace.edit('content').setValue(data);
                     ace.edit('content').clearSelection();
                     ace.edit('content').moveCursorToPosition(position);
+                    ace.edit('content').moveCursorToPosition(position);
+					ace.edit('content').scrollToLine(lineNumber, false, true)
                 });
         }
 
