@@ -24,18 +24,20 @@ if (! isset ( $_POST ["q"] )) {
 	<h3>Submit new question</h3>
 
 	<br>
+  <div id="main-content" class="box center">
 	<form action="" method="POST">
 		<label for="stage">Stage ID </label> <input type="text" name="stageid"
 			id="stage" placeholder="For example: 1a" required /><br>
     <label for="question">Question ID </label>
-    <input type="text" name="questionid" placeholder="For example: 2" required /><br>
-    <label for="Q">Question </label>
-		<textarea name="question" id="Q" required></textarea>
-		<br> <label for="ans">Expected Output </label>
-		<textarea name="answer" id="ans" required></textarea>
+    <input type="text" name="questionid" placeholder="For example: 2" required/><br>
+    <label for="Q">Question </label><br>
+		<textarea name="question" id="Q" required style="height: 60ch; width: 70ch;"></textarea>
+		<br> <label for="ans">Expected Output </label><br>
+		<textarea name="answer" id="ans" required style="height: 60ch; width: 70ch;"></textarea>
 		<br> <input type="hidden" name="q" value="1" />
 		<button type="submit" class="btn btn-default">Submit</button>
 	</form>
+</div>
 	<br>
 	<a href="index.php" style="color: black"><button>Home</button></a>
 	<!--
@@ -93,6 +95,6 @@ if (! isset ( $_POST ["q"] )) {
 	$fname1 = $stageid . $questionid . ".ans";
 	$i = file_put_contents ( "answers/" . $fname, $answer );
   echo 'Question added';
-	header('Location: addq.php');
+	header('Location: viewq.php');
 }
 ?>

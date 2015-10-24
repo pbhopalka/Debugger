@@ -33,14 +33,18 @@ p {
 <body>
 	<h1 align=center>Welcome to the Manager's Platform</h1>
 	<br>
+  <p align=center>Content Management System for Debugger</p>
 	<a href="addq.php"><button>
 			<h3 style="color: black">Submit new question</h3>
+		</button></a>
+	<br>
+  <a href="viewq.php"><button>
+			<h3 style="color: black">View questions</h3>
 		</button></a>
 	<br>
 	<a href="addteam.php"><button>
 			<h3 style="color: black">Add new team</h3>
 		</button></a>
-
 	<br>
 	<a href="addstage.php"><button>
 			<h3 style="color: black">Add new stage</h3>
