@@ -59,7 +59,7 @@ if (! isset ( $_SESSION ['admin'] ))
             <tr>
               <td>'.$row["stageid"].'</td>
               <td>'.$row["questionid"].'</td>
-              <td><pre style="white-space: pre-line;text-align : left;">'.$row["question"].'</pre></td>
+              <td><pre style="white-space: pre-line;text-align : left;">'.htmlspecialchars($row['question']).'</pre></td>
             </tr>';
         	} ?>
       </table>

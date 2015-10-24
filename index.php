@@ -1,8 +1,10 @@
 <?php
 require_once ("includes/global.php");
-session_start ();
-echo 'the Team ID is ', $_SESSION ['teamid'];
-echo '<br>the status is ', $_SESSION ['status'];
+if(!isset($_SESSION)) {
+	session_start(); 
+}
+//echo 'the Team ID is ', $_SESSION ['teamid'];
+//echo '<br>the status is ', $_SESSION ['status'];
 if (! isset ( $_SESSION ['teamid'] ))
 	header ( "Location: login.php" ) && die ();
 elseif ($_SESSION ['status'] == 2)
