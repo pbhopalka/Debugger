@@ -26,10 +26,10 @@ if (! isset ( $_POST ["q"] )) {
 	<br>
 	<form action="" method="POST">
 		<label for="stage">Stage ID </label> <input type="text" name="stageid"
-			id="stage" placeholder="For example: 1a" required /><br> <label
-			for="question">Question ID </label> <input type="text"
-			name="questionid" placeholder="For example: 2" required /><br> <label
-			for="Q">Question </label>
+			id="stage" placeholder="For example: 1a" required /><br>
+    <label for="question">Question ID </label>
+    <input type="text" name="questionid" placeholder="For example: 2" required /><br>
+    <label for="Q">Question </label>
 		<textarea name="question" id="Q" required></textarea>
 		<br> <label for="ans">Expected Output </label>
 		<textarea name="answer" id="ans" required></textarea>
@@ -82,6 +82,8 @@ if (! isset ( $_POST ["q"] )) {
 	$questionid = $_POST ['questionid'];
 	$question = $_POST ['question'];
 	$answer = $_POST ['answer'];
+  $question = $mysqli->real_escape_string($question);
+  $answer = $mysqli->real_escape_string($answer);
 	$sql = "INSERT INTO questions VALUES('{$stageid}','{$questionid}','{$question}')";
 	if (! $result = $mysqli->query ( $sql )) {
 		die ( "Error" . $mysqli->error );
@@ -90,6 +92,7 @@ if (! isset ( $_POST ["q"] )) {
 	$i = file_put_contents ( "questions/" . $fname, $question );
 	$fname1 = $stageid . $questionid . ".ans";
 	$i = file_put_contents ( "answers/" . $fname, $answer );
+  echo 'Question added';
 	header('Location: addq.php');
 }
 ?>
