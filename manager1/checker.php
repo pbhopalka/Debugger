@@ -57,7 +57,7 @@ if (!isset($_POST ['stage'])) {
 	 </div>
 	 </form>
 	 <br>';
-    /*include '../includes/connection.php';*/
+    include '../includes/connection.php';
     $delete = 'DELETE from result';
     $mysqli->query($delete);
     $stageid = $_POST ['stage'];
@@ -70,9 +70,10 @@ if (!isset($_POST ['stage'])) {
     while ($row = mysqli_fetch_array($result)) {
         $fname = $row ['teamid'].$row ['stageid'].$row ['questionid'];
         $directory = 'submissions/';
-        $codename = $fname.'.cpp';
+        $codename = $fname.'.c';
+        $execname = $fname.'.o';
         $outname = $fname.'.out';
-        $ansname = $fname.'.ans';
+        $ansname = $row ['stageid'].$row ['questionid'].'.ans';
         echo 'FileName = ', $directory.$codename, '<br>';
         $i = file_put_contents($directory.$codename, $row ['ans']);
         echo '$i Type = ', gettype($i), '<br>';
@@ -80,50 +81,35 @@ if (!isset($_POST ['stage'])) {
             echo 'Dammit!!<br>';
             die();
         }
-        $cmd = "./compile.sh '{$directory}{$outname}' '{$directory}{$codename}' 2>&1";
+        $lastLine = exec('ls', $arr, $retval);
+        echo '$arr = ', $arr, '<br>';
+        $retval = -1;
+        echo '$retval = ', $retval, '<br>';
+        echo '$lastLine = ', $lastLine, '<br>';
+        $cmd = "./compile.sh '{$directory}{$codename}' '{$directory}{$execname}' 2>&1";
         echo '$cmd = ', $cmd, '<br>';
-				unset($arr);
         $lastLine = exec($cmd, $arr, $retval);
         echo '$arr = ', $arr, '<br>';
-				foreach ($arr as $i) {
-					echo $i,'<br>';
-				}
         echo '$retval = ', $retval, '<br>';
         echo '$lastLine = ', $lastLine, '<br>';
         // die();
         if (!$retval) {
-						$actAns = "answers/" . $row ['stageid'].$row ['questionid'] . ".ans";
-						echo $actAns , '<br>';
-            $cmd1 = "./run.sh '{$directory}{$outname}' '{$directory}{$ansname}' '{$actAns}'";
+            $cmd1 = "./run.sh '{$directory}{$execname}' '{$directory}{$outname}'";
             echo '$cmd1 = ', $cmd1, '<br>';
-						unset($arr);
             $lastLine = exec($cmd1, $arr, $retval);
-						foreach ($arr as $i) {
-							echo $i,'<br>';
-						}
             echo '$arr = ', $arr, '<br>';
             echo '$retval = ', $retval, '<br>';
-						echo '$lastLine = ', $lastLine, '<br>';
-						echo "----------------------------------------------------------<br>";
-            if ($lastLine!=0) {
+            if ($retval) {
                 echo 'Gone to if part<br>';
                 $sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}',NULL)";
                 $result1 = $mysqli->query($sql);
                 continue;
             }
-						echo $directory.$codename."<br>";
-						echo "questions/".$row['stageid'].$row['questionid'].".q";
-						unset($arr);
-						$cmd1 = './changes.sh '.$directory.$codename.' questions/'.$row["stageid"].$row["questionid"].'.q';
-						$lastLine = exec($cmd2, $arr, $retval);
-						$sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',1,'{$row['time']}','{$lastLine}')";
-						$result1 = $mysqli->query($sql);
-/*						$diff = Diff::compareFiles( $directory.$codename, $row['stageid'].$row['questionid'].".q");
+            $diff = Diff::compareFiles('submissions/'.$outname, 'answers/'.$ansname);
             $cmd3 = '/home/';
             $count = 0;
+
             foreach ($diff as $a) {
-								print_r($a);
-								echo "<br>";
                 if ($a [1] == Diff::INSERTED || $a [1] == Diff::DELETED) {
                     $count = $count + 1;
                 }
@@ -143,9 +129,33 @@ if (!isset($_POST ['stage'])) {
                 // $result1 = $mysqli->query($sql);
                 $sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}',NULL)";
                 $result1 = $mysqli->query($sql);
-            }*/
+            }
+        } else {
+            echo 'Gone to else part';
+            $qname = $row ['stageid'].$row ['questionid'].'.q';
+            $diff = Diff::compareFiles('submissions/'.$codename, 'questions/'.$qname);
+            $count = 0;
+
+            foreach ($diff as $a) {
+                if ($a [1] == Diff::INSERTED || $a [1] == Diff::DELETED) {
+                    $count = $count + 1;
+                }
+            }
+            echo($count).'<br>';
+            // $cmd2 = "/home/anant/debugger/changes.sh '{$codename}' '{$qname}'";
+            // $ret1 = shell_exec($cmd2);
+            // $out = file_get_contents("/home/anant/debugger/out.txt");
+            // echo $out;
+            // echo $cmd2."<br>";
+            // echo $arr[0]."<br>";
+            // echo $retval."<br>";
+            // echo $ret1." changes<br>";
+            $sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}','{$count}')";
+            if (!$result1 = $mysqli->query($sql)) {
+                die('Error'.$mysqli->error);
+            }
         }
-        // die();*/
+        // die();
     }
     $sql = "SELECT teamid, sum(status) AS score,sum(time) AS time_remaining, sum(changes) AS total_changes FROM result WHERE stageid = '{$stageid}' GROUP BY teamid ORDER BY score DESC,time DESC,changes ASC";
     $result = $mysqli->query($sql);

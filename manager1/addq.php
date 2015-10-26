@@ -84,8 +84,9 @@ if (! isset ( $_POST ["q"] )) {
 	$questionid = $_POST ['questionid'];
 	$question = $_POST ['question'];
 	$answer = $_POST ['answer'];
-  $question1 = $mysqli->real_escape_string($question);
-  $sql = "INSERT INTO questions VALUES('{$stageid}','{$questionid}','{$question1}')";
+  $question = $mysqli->real_escape_string($question);
+  $answer = $mysqli->real_escape_string($answer);
+	$sql = "INSERT INTO questions VALUES('{$stageid}','{$questionid}','{$question}')";
 	echo $sql, '<br>';
 	if (! $result = $mysqli->query ( $sql )) {
 		die ( "Error" . $mysqli->error );
@@ -93,7 +94,7 @@ if (! isset ( $_POST ["q"] )) {
 	$fname = $stageid . $questionid . ".q";
 	$i = file_put_contents ( "questions/" . $fname, $question );
 	$fname1 = $stageid . $questionid . ".ans";
-	$i = file_put_contents ( "answers/" . $fname1, $answer );
+	$i = file_put_contents ( "answers/" . $fname, $answer );
   echo 'Question added';
 	header('Location: viewq.php');
 }

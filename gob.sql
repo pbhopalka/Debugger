@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.8.1deb1
+-- version 4.2.12deb2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2013 at 03:58 PM
--- Server version: 5.5.34-0ubuntu0.13.04.1
--- PHP Version: 5.4.9-4ubuntu2.3
+-- Generation Time: Oct 24, 2015 at 09:49 PM
+-- Server version: 5.6.25-0ubuntu0.15.04.1
+-- PHP Version: 5.6.4-4ubuntu6.3
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -26,15 +26,32 @@ SET time_zone = "+00:00";
 -- Table structure for table `answers`
 --
 
-use test;
-
 CREATE TABLE IF NOT EXISTS `answers` (
   `teamid` varchar(7) NOT NULL,
   `questionid` varchar(2) NOT NULL,
   `stageid` varchar(2) NOT NULL,
   `ans` longtext NOT NULL,
-  PRIMARY KEY (`teamid`,`questionid`,`stageid`)
+  `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manager`
+--
+
+CREATE TABLE IF NOT EXISTS `manager` (
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `manager`
+--
+
+INSERT INTO `manager` (`username`, `password`) VALUES
+('pbhopalka', 'piyush'),
+('piyush', '123456');
 
 -- --------------------------------------------------------
 
@@ -45,8 +62,34 @@ CREATE TABLE IF NOT EXISTS `answers` (
 CREATE TABLE IF NOT EXISTS `questions` (
   `stageid` varchar(2) NOT NULL,
   `questionid` tinyint(4) NOT NULL,
-  `question` longtext NOT NULL,
-  PRIMARY KEY (`stageid`,`questionid`)
+  `question` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz`
+--
+
+CREATE TABLE IF NOT EXISTS `quiz` (
+  `teamid` varchar(7) NOT NULL,
+  `stageid` varchar(2) NOT NULL,
+  `timeLeft` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `result`
+--
+
+CREATE TABLE IF NOT EXISTS `result` (
+  `teamid` varchar(20) NOT NULL,
+  `stageid` varchar(5) NOT NULL,
+  `questionid` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `changes` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -58,9 +101,8 @@ CREATE TABLE IF NOT EXISTS `questions` (
 CREATE TABLE IF NOT EXISTS `stages` (
   `stageid` varchar(2) NOT NULL,
   `type` varchar(10) NOT NULL,
-  `time` tinyint(4) NOT NULL,
-  `stageStart` int(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`stageid`)
+  `time` int(6) NOT NULL,
+  `stageStart` int(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -74,49 +116,48 @@ CREATE TABLE IF NOT EXISTS `teams` (
   `status` tinyint(4) NOT NULL DEFAULT '0',
   `stage` varchar(3) NOT NULL DEFAULT '0',
   `language` int(11) NOT NULL DEFAULT '0',
-  `password` tinytext NOT NULL,
-  PRIMARY KEY (`teamid`)
+  `password` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- ---------------------------------------------------------
-
 --
--- Table Structure for table 'manager'
+-- Indexes for dumped tables
 --
 
-CREATE TABLE IF NOT EXISTS `manager` (
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- ---------------------------------------------------------
-
--- ---------------------------------------------------------
+--
+-- Indexes for table `answers`
+--
+ALTER TABLE `answers`
+ ADD PRIMARY KEY (`teamid`,`questionid`,`stageid`);
 
 --
--- Table Structure for table 'quiz'
+-- Indexes for table `manager`
 --
-
-CREATE TABLE quiz (
-`teamid` varchar(7) NOT NULL,
-`stageid` varchar(2) NOT NULL,
-`timeLeft` tinyint(4) NOT NULL,
-PRIMARY KEY (`teamid`,`stageid`));
--- ---------------------------------------------------------
+ALTER TABLE `manager`
+ ADD PRIMARY KEY (`username`);
 
 --
--- Table Structure for table 'result'
+-- Indexes for table `questions`
 --
+ALTER TABLE `questions`
+ ADD PRIMARY KEY (`stageid`,`questionid`);
 
-CREATE TABLE IF NOT EXISTS `result` (
-  `teamid` varchar(20) NOT NULL,
-  `stageid` varchar(5) NOT NULL,
-  `questionid` int(11) NOT NULL,
-  `status` int(11) NOT NULL,
-  `time` int(11) NOT NULL,
-  `changes` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Indexes for table `quiz`
+--
+ALTER TABLE `quiz`
+ ADD PRIMARY KEY (`teamid`,`stageid`);
+
+--
+-- Indexes for table `stages`
+--
+ALTER TABLE `stages`
+ ADD PRIMARY KEY (`stageid`);
+
+--
+-- Indexes for table `teams`
+--
+ALTER TABLE `teams`
+ ADD PRIMARY KEY (`teamid`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

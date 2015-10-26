@@ -42,7 +42,6 @@ function GetInstructions($lang) {?>
 					<li>If any doubts, please ask the event managers before proceeding.</li>
 					<li>The Decision of the Judges is final & beyond reproach.</li>
 				</ul>
-				<button class="btn btn-large btn-primary centerh" onclick="window.location.href = 'starttest.php'" style="width: 150px;" id="btn-start">Lets Start!</button><br>
 <?php
 }
 ?>
