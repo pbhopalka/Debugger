@@ -14,8 +14,8 @@ if (! isset ( $_POST ['op'] )) {
 	metadetails ();
 	echo '</head>';
 	echo '<body>';
-	echo '<a href="logout.php">Logout</a><br>';
-	echo $_SESSION['status'],'<br>';
+//	echo '<a href="logout.php">Logout</a><br>';
+//	echo $_SESSION['status'],'<br>';
 	$stageQuery = "SELECT * FROM `stages` WHERE `stageid` = '{$_SESSION['stage']}';";
 	$stageResult = $mysqli->query ( $stageQuery );
 	$stageResultRow = $stageResult->fetch_assoc ();
@@ -28,12 +28,12 @@ if (! isset ( $_POST ['op'] )) {
 		$quizResult = $mysqli->query ( $quizQuery );
 		$quizResultRow = $quizResult->fetch_assoc ();
 		$time = $quizResultRow ['timeLeft'];
-		echo  $time,'<br>';
+//		echo  $time,'<br>';
 
 ?>
 
     <div style="width: 90%; top: 40px; margin: auto">
-        <div id="content" class="box" style="height: 70vh;"></div>
+        <div id="content" class="box" style="height: 70vh; margin-top: 30px;"></div>
         <?php
 			$quesQuery = "SELECT COUNT(*) FROM `questions` WHERE `stageid`='{$_SESSION['stage']}'";
 //			echo $quesQuery,'<br>';
@@ -58,7 +58,7 @@ if (! isset ( $_POST ['op'] )) {
     <button id="resetAnswer" onclick="ResetAns('question.php', '<?php echo $_SESSION['stage']; ?>')" class="btn btn-large btn-danger" style="position: absolute; right: 1%; bottom: 5%; width: 200px;">Reset Answer
     </button>
 
-    <button id="submitsol" onclick="SubmitAns('question.php', '<?php echo $_SESSION['stage']; ?>')" class="btn btn-large btn-success" style="position: absolute; right: 50%; bottom: 5%; width: 200px;">Submit Solutions
+    <button id="submitsol" onclick="SubmitAns('question.php', '<?php echo $_SESSION['stage']; ?>')" class="btn btn-large btn-success" style="position: absolute; right: 50%; bottom: 5%; width: 200px;">Submit ALL Solutions
     </button>
 
     <button id="timer_count" class="btn btn-large btn-warning" style="position: absolute; left: 1%; bottom: 5%; width: 200px;"></button>
@@ -106,7 +106,8 @@ if (! isset ( $_POST ['op'] )) {
         function Ace() {
             var editor = ace.edit("content");
             editor.setTheme("ace/theme/textmate");
-            editor.getSession().setMode("ace/mode/h");
+//            editor.getSession().setMode("ace/mode/h");
+            editor.setHighlightSelectedWord(false);
         }
 
         function GetQuestion(page, b, c, d, e) {
@@ -120,6 +121,7 @@ if (! isset ( $_POST ['op'] )) {
                     //val1 = data.getElementById
                     ace.edit('content').setValue(data);
 					ace.edit('content').clearSelection();
+					
                 });
             var i = 1;
             while (i < 5) {
@@ -137,6 +139,7 @@ if (! isset ( $_POST ['op'] )) {
         function Sync(a, b, c) {
             position = ace.edit('content').getCursorPosition();
             lineNumber = ace.edit('content').getFirstVisibleRow();
+            
             $.post(a, {
                     stage: b,
                     timeLeft: c,
@@ -148,7 +151,8 @@ if (! isset ( $_POST ['op'] )) {
                     ace.edit('content').clearSelection();
                     ace.edit('content').moveCursorToPosition(position);
                     ace.edit('content').moveCursorToPosition(position);
-					ace.edit('content').scrollToLine(lineNumber, false, true)
+					ace.edit('content').scrollToLine(lineNumber, false, true);
+					
                 });
         }
 
@@ -160,6 +164,7 @@ if (! isset ( $_POST ['op'] )) {
                 function (data) {
                     ace.edit('content').setValue(data);
 					ace.edit('content').clearSelection();
+					
                 });
         }
 

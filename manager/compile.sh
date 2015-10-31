@@ -1,7 +1,7 @@
 var=$1
 fname=$2
-echo "fname",$fname
-echo "var",$var
+#echo "fname",$fname
+#echo "var",$var
 #ext=".out"
 #ext1=".ans"
 #ext2=".o"

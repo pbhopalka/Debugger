@@ -30,7 +30,7 @@ function AjaxGet() {
 CONTENT;
 }
 function GetInstructions($lang) {?>
-				<ul id="Rules">
+				<!--<ul id="Rules">
 					<li>The first round will be of 30 minutes.</li>
 					<li>You will be given 4 questions with syntax errors.</li>
 					<li>Your answer should not contain any <strong> errors or warnings </strong> when compiled with gcc/g++ compiler.</li>
@@ -41,7 +41,7 @@ function GetInstructions($lang) {?>
 					<li>Any act of dishonesty will result in immediate disqualification.</li>
 					<li>If any doubts, please ask the event managers before proceeding.</li>
 					<li>The Decision of the Judges is final & beyond reproach.</li>
-				</ul>
+				</ul>-->
 <?php
 }
 ?>

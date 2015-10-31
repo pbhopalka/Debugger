@@ -90,10 +90,6 @@ if (! isset ( $_POST ["q"] )) {
 	if (! $result = $mysqli->query ( $sql )) {
 		die ( "Error" . $mysqli->error );
 	}
-	$fname = $stageid . $questionid . ".q";
-	$i = file_put_contents ( "questions/" . $fname, $question );
-	$fname1 = $stageid . $questionid . ".ans";
-	$i = file_put_contents ( "answers/" . $fname1, $answer );
   echo 'Question added';
 	header('Location: viewq.php');
 }

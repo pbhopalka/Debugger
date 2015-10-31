@@ -22,6 +22,9 @@ if (!isset($_POST ['stage'])) {
 <body>
 <h3>Check Solutions</h3>
 <br>
+<a href="index.php"><button>
+		<style="color: black">Home</style>
+	</button></a><br>
 <form action="" method="POST" class="form-horizontal" role="form">
 <select name="stage">
 	<option value="1a">1a</option>
@@ -33,6 +36,7 @@ if (!isset($_POST ['stage'])) {
 </select>
 		<button type="submit" class="btn btn-default">Submit</button>
 	</form>
+	
 </body>
 </html>
 <?php
@@ -43,6 +47,9 @@ if (!isset($_POST ['stage'])) {
 	 <body>
 	 <h3>Check Solutions</h3>
 	 <br>
+	 <a href="index.php"><button>
+		<style="color: black">Home</style>
+	</button></a><br>
 	 <form action="" method="POST" class="form-horizontal" role="form">
 	 <select name="stage">
 	 <option value="1a">1a</option>
@@ -58,12 +65,35 @@ if (!isset($_POST ['stage'])) {
 	 </form>
 	 <br>';
     /*include '../includes/connection.php';*/
+	$stageid = $_POST ['stage'];
+	
+	if (!file_exists('questions')) {
+		mkdir('questions', 0777, true);
+	}
+	if (!file_exists('submissions')) {
+		mkdir('submissions', 0777, true);
+	}
+	
+	
+	$writequest = "SELECT * FROM questions where stageid = '".$stageid."';";
+	echo $writequest,'<br>';
+	if (!$result1000 = $mysqli->query($writequest)) {
+        die('Error'.$mysqli->error);
+    }
+	while ($row = mysqli_fetch_array($result1000)) {
+		$fname = $stageid . $row ['questionid'] . ".q";
+		echo $fname,'<br>';
+		$i = file_put_contents ( "questions/" . $fname, $row ['question'] );
+		if(chmod("questions/" . $fname,0777))
+			echo "Pass";
+		else
+			echo "Fail";
+	}
     $delete = 'DELETE from result';
     $mysqli->query($delete);
-    $stageid = $_POST ['stage'];
-    echo $stageid, '<br>';
+   
     $sql = "SELECT * FROM answers where stageid = '".$stageid."';";
-    echo $sql, '<br>';
+    echo 'Checking Submissions for stage ' . $stageid . '<br>';
     if (!$result = $mysqli->query($sql)) {
         die('Error'.$mysqli->error);
     }
@@ -73,51 +103,50 @@ if (!isset($_POST ['stage'])) {
         $codename = $fname.'.cpp';
         $outname = $fname.'.out';
         $ansname = $fname.'.ans';
-        echo 'FileName = ', $directory.$codename, '<br>';
+        echo '<strong>------------------------------------------------------------------------------------------------------------------------------------------------------------------------</strong><br>';
+        echo 'Checking sumission <strong>', $directory.$codename, '</strong><br>';
         $i = file_put_contents($directory.$codename, $row ['ans']);
-        echo '$i Type = ', gettype($i), '<br>';
         if ($i === false) {
             echo 'Dammit!!<br>';
             die();
         }
         $cmd = "./compile.sh '{$directory}{$outname}' '{$directory}{$codename}' 2>&1";
-        echo '$cmd = ', $cmd, '<br>';
-				unset($arr);
+        unset($arr);
         $lastLine = exec($cmd, $arr, $retval);
-        echo '$arr = ', $arr, '<br>';
-				foreach ($arr as $i) {
-					echo $i,'<br>';
-				}
+        echo '<strong>Compilation Output:</strong><br>';
+		foreach ($arr as $i) {
+			echo $i,'<br>';
+		}
         echo '$retval = ', $retval, '<br>';
         echo '$lastLine = ', $lastLine, '<br>';
         // die();
         if (!$retval) {
-						$actAns = "answers/" . $row ['stageid'].$row ['questionid'] . ".ans";
-						echo $actAns , '<br>';
-            $cmd1 = "./run.sh '{$directory}{$outname}' '{$directory}{$ansname}' '{$actAns}'";
-            echo '$cmd1 = ', $cmd1, '<br>';
-						unset($arr);
+			$actAns = "answers/" . $row ['stageid'].$row ['questionid'] . ".ans";
+			$fileInput = "input/" . $row ['stageid'].$row ['questionid'] . ".txt";
+			
+			echo '<strong>Compilation Successful-Running Exe</strong><br>';
+            
+			$cmd1 = "./run.sh '{$directory}{$outname}' '{$directory}{$ansname}' '{$fileInput}' '{$actAns}'";
+			echo $cmd1, '<br>';
+			unset($arr);
             $lastLine = exec($cmd1, $arr, $retval);
-						foreach ($arr as $i) {
-							echo $i,'<br>';
-						}
-            echo '$arr = ', $arr, '<br>';
-            echo '$retval = ', $retval, '<br>';
-						echo '$lastLine = ', $lastLine, '<br>';
-						echo "----------------------------------------------------------<br>";
-            if ($lastLine!=0) {
+			foreach ($arr as $i) {
+				echo $i,'<br>';
+			}
+			$lastLine = intval($lastLine);
+			if ($lastLine!=0) {
                 echo 'Gone to if part<br>';
                 $sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',0,'{$row['time']}',NULL)";
                 $result1 = $mysqli->query($sql);
                 continue;
             }
-						echo $directory.$codename."<br>";
-						echo "questions/".$row['stageid'].$row['questionid'].".q";
-						unset($arr);
-						$cmd1 = './changes.sh '.$directory.$codename.' questions/'.$row["stageid"].$row["questionid"].'.q';
-						$lastLine = exec($cmd2, $arr, $retval);
-						$sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',1,'{$row['time']}','{$lastLine}')";
-						$result1 = $mysqli->query($sql);
+			echo '<strong>Running Successful-Computing Changes made</strong><br>';
+			unset($arr);
+			$cmd1 = './changes.sh '.$directory.$codename.' questions/'.$row["stageid"].$row["questionid"].'.q';
+			$lastLine = exec($cmd1, $arr, $retval);
+			echo $lastLine,'<br>';
+			$sql = "INSERT INTO result VALUES('{$row['teamid']}','{$row['stageid']}','{$row['questionid']}',1,'{$row['time']}','{$lastLine}')";
+			$result1 = $mysqli->query($sql);
 /*						$diff = Diff::compareFiles( $directory.$codename, $row['stageid'].$row['questionid'].".q");
             $cmd3 = '/home/';
             $count = 0;
@@ -183,6 +212,12 @@ if (!isset($_POST ['stage'])) {
         echo '</table></div>';
     }
     echo '</html>';
+//	$cmd = "rm -rf questions";
+//    unset($arr);
+//    $lastLine = exec($cmd, $arr, $retval);
+//    $cmd = "rm -rf submissions";
+//    unset($arr);
+//    $lastLine = exec($cmd, $arr, $retval);
 }
 
 ?>
