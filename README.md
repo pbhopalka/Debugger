@@ -23,8 +23,7 @@ hassle of the event manager to have an extensive knowledge of the underlying dat
 
 ## Some information
 
-`/includes/config.ini` and `/includes/connection.php` have not been added due to security
-reasons. Once the platform is completed, it will be added.
+`/includes/config.ini` and `/includes/connection.php` store and use the database credentials to log into the database to access the questions and the answers. Please replace the information with your database credentials.
 
 Make sure that by default, index.html loads before index.php. For this, .htaccess file
 is used. But it needs to be activated. To see how to activate in Linux, [check here](https://www.digitalocean.com/community/tutorials/how-to-use-the-htaccess-file)
